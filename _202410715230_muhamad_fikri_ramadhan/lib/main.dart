@@ -1,27 +1,24 @@
 // ============================================================
-// TEMPLATE PORTOFOLIO GAYA TERMINAL (FLUTTER, MOBILE FIRST)
-// ------------------------------------------------------------
-// Cara ganti isi : edit bagian "DATA" tepat di bawah ini saja.
-// Paket wajib    : google_fonts  ->  flutter pub add google_fonts
-// Foto (opsional): taruh di assets/foto.jpg lalu daftarkan di
-//                  pubspec.yaml (lihat catatan di _IronPhoto).
+// TEMPLATE PORTOFOLIO GAYA TERMINAL (FLUTTER, MOBILE FIRST & WEB)
 // ============================================================
 import 'dart:async';
 import 'dart:math' as math;
+import 'dart:ui' show PointerDeviceKind;
 
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // ============================================================
-// DATA  —  EDIT BAGIAN INI UNTUK MENGGANTI ISI
+// DATA  —  MUHAMAD FIKRI RAMADHAN
 // ============================================================
 class Social {
   final String label, handle, url;
-  final IconData? icon; // pakai icon ...
-  final String? glyph; // ... atau teks pendek, mis. "in"
+  final IconData? icon;
+  final String? glyph;
   const Social({
     required this.label,
     required this.handle,
@@ -90,59 +87,61 @@ const kSecondaryButton = 'Lihat Proyek';
 const kPhotoAsset = 'assets/foto.jpg';
 
 // Kartu terminal di hero
-const kTerminalUser = 'Fikri@portfolio: ~';
+const kTerminalUser = 'fikri@portfolio: ~';
 const kProfile = <String, Object>{
   'nama': 'Muhamad Fikri Ramadhan',
   'pekerjaan': 'Mahasiswa Informatika',
   'akademisi': 'Informatika, Universitas Bhayangkara Jakarta Raya',
-  'riset': ['Computer Architecture','Mobile Development','Software Engineering'],
+  'riset': [
+    'Computer Architecture',
+    'Mobile Development',
+    'Software Engineering',
+  ],
   'lokasi': 'Bekasi, Indonesia',
 };
 const kUptime = 'Semester 5';
-const kTerminalOk = 'All systems fully operational, Sir. At your service. #JARVIS';
+const kTerminalOk =
+    'All systems fully operational, Sir. At your service. #JARVIS';
 
-// ---------- Sosial media (dipakai di hero & kontak) ----------
+// ---------- Sosial Media ----------
 const kSocials = [
   Social(
     label: 'LinkedIn',
-    handle: 'linkedin.com/in/username',
-    url: 'https://linkedin.com/in/username',
+    handle: 'linkedin.com/in/muhamadfikri',
+    url: 'https://linkedin.com/in/muhamadfikri',
     glyph: 'in',
   ),
   Social(
-    label: 'Google Scholar',
-    handle: 'Sitasi & publikasi ilmiah',
-    url: 'https://scholar.google.com/citations?user=ID',
-    icon: Icons.school,
+    label: 'GitHub',
+    handle: 'github.com/muhamadfikri23092006-ops',
+    url: 'https://github.com/muhamadfikri23092006-ops',
+    icon: Icons.code,
   ),
   Social(
     label: 'Instagram',
-    handle: '@username',
+    handle: '@pkrai_0',
     url: 'https://instagram.com/pkrai_0',
     icon: Icons.camera_alt_outlined,
   ),
   Social(
-    label: 'Facebook',
-    handle: 'facebook.com/username',
-    url: 'https://facebook.com/username',
-    icon: Icons.facebook,
-  ),
-  Social(
-    label: 'Website',
-    handle: 'websitekamu.com',
-    url: 'https://websitekamu.com',
+    label: 'Vercel Showcase',
+    handle: 'portfoliomfr.vercel.app',
+    url: 'https://portfoliomfr.vercel.app',
     icon: Icons.language,
   ),
 ];
 
 // ---------- Tentang ----------
-// Tanda **teks** membuat teks jadi tebal.
 const kAboutParagraphs = [
   'Halo! Saya **Muhamad Fikri Ramadhan**, seorang **Mahasiswa Informatika** yang tertarik pada teknologi, data, dan pengembangan perangkat lunak.',
-  'Saat ini saya sedang kuliah di **Universitas Bhayangkara Jakarta Raya** dan aktif sebagai **event Organizer** di **UKM DSC**.',
+  'Saat ini saya sedang kuliah di **Universitas Bhayangkara Jakarta Raya** dan aktif sebagai **Event Organizer** di **UKM DSC**.',
   'Memegang prinsip bahwa kode yang baik bukan cuma sekadar jalan, tapi juga efisien, rapi, dan memberikan solusi nyata buat penggunanya.',
 ];
-const kAboutInfo = ['NPM: 202410715230', 'ORCID: 0000-0000-0000-0000', 'Bekasi, Indonesia'];
+const kAboutInfo = [
+  'NPM: 202410715230',
+  'ORCID: 0000-0000-0000-0000',
+  'Bekasi, Indonesia',
+];
 const kStats = [
   Stat(2, '+', 'Tahun Pengalaman'),
   Stat(3, '+', 'Proyek Selesai'),
@@ -155,7 +154,7 @@ const kSkills = [
   SkillGroup('Tools', ['Git', 'Docker', 'Linux(ubuntu)', 'VS Code']),
 ];
 
-// ---------- Karir ----------
+// ---------- Karir & Pendidikan ----------
 const kCareer = [
   CareerItem(
     period: '2024 — Sekarang',
@@ -168,7 +167,7 @@ const kCareer = [
   CareerItem(
     period: '2022 — 2024',
     title: 'Sekolah Menengah Atas (SMA) IPA',
-    org: 'MAN1 Kota Bekasi',
+    org: 'MAN 1 Kota Bekasi',
     desc:
         'Nginjek fondasi kepemimpinan dan jiwa sosial sejak SMA lewat PMR, Kordiv Acara PHBI ROHIS, serta Sekretaris Karang Taruna RW 07. Berpengalaman di bidang humanitarian, operasional event, dan administrasi.',
     tags: ['Rohis', 'PMR', 'Karang Taruna'],
@@ -176,17 +175,18 @@ const kCareer = [
   CareerItem(
     period: '2018 — 2022',
     title: 'Sekolah Menengah Pertama (SMP)',
-    org: 'SMPIT AVICENNA',
+    org: 'SMPIT Avicenna',
     desc:
-        'Aktif di ekskul PMR dan Futsal, meraih Juara 1 Perlombaan Pertolongan Pertama (PP) Tim sebanyak 2 kali, serta menyelesaikan hafalan 2 Juz Al-Qur\'an',
-    tags: ['Futsal', 'PMR', '2 Juz Alquran']
+        'Aktif di ekskul PMR dan Futsal, meraih Juara 1 Perlombaan Pertolongan Pertama (PP) Tim sebanyak 2 kali, serta menyelesaikan hafalan 2 Juz Al-Qur\'an.',
+    tags: ['Futsal', 'PMR', '2 Juz Alquran'],
   ),
   CareerItem(
-    period: '2015 — 2018',
+    period: '2012 — 2018',
     title: 'Sekolah Dasar (SD)',
-    org: 'SDIT Almanar',
-    desc: 'Menyelesaikan pendidikan dasar dengan fokus pada pembentukan karakter, akademik, dan kegiatan siswa.',
-    tags: ['karakter building', 'akademik']
+    org: 'SDIT Al Manar',
+    desc:
+        'Menyelesaikan pendidikan dasar berbasis Islam terpadu dengan fokus pada pembentukan karakter, akademik, dan kegiatan siswa.',
+    tags: ['Karakter Building', 'Akademik', 'SDIT Al Manar'],
   ),
 ];
 
@@ -196,70 +196,81 @@ const kAchievements = [
     icon: Icons.emoji_events_outlined,
     tag: 'Kompetisi',
     title: 'Juara 1 Lomba PP Tim (2x)',
-    desc: 'Berhasil meraih Juara 1 tingkat regional sebanyak 2 kali dalam kategori Pertolongan Pertama (PP) Tim melalui ekskul PMR.',
+    desc:
+        'Berhasil meraih Juara 1 tingkat regional sebanyak 2 kali dalam kategori Pertolongan Pertama (PP) Tim melalui ekskul PMR.',
   ),
   Achievement(
     icon: Icons.groups_outlined,
     tag: 'Kepemimpinan',
     title: 'Kordiv Acara PHBI ROHIS',
-    desc: 'Memimpin perencanaan dan pelaksanaan seluruh kegiatan perayaan hari besar Islam di lingkungan MAN 1 Kota Bekasi.',
+    desc:
+        'Memimpin perencanaan dan pelaksanaan seluruh kegiatan perayaan hari besar Islam di lingkungan MAN 1 Kota Bekasi.',
   ),
   Achievement(
     icon: Icons.assignment_turned_in_outlined,
     tag: 'Organisasi',
     title: 'Sekretaris Karang Taruna RW 07',
-    desc: 'Mengelola administrasi, penyusunan dokumen resmi, serta koordinasi kegiatan kepemudaan warga di tingkat RW.',
+    desc:
+        'Mengelola administrasi, penyusunan dokumen resmi, serta koordinasi kegiatan kepemudaan warga di tingkat RW.',
   ),
   Achievement(
     icon: Icons.auto_stories_outlined,
     tag: 'Keagamaan',
     title: 'Hafiz 2 Juz Al-Qur\'an',
-    desc: 'Menyelesaikan program hafalan 2 Juz Al-Qur\'an dengan baik selama menempuh studi di SMPIT Avicenna.',
+    desc:
+        'Menyelesaikan program hafalan 2 Juz Al-Qur\'an dengan baik selama menempuh studi di SMPIT Avicenna.',
   ),
   Achievement(
     icon: Icons.sports_soccer_outlined,
     tag: 'Olahraga',
     title: 'Tim Futsal Sekolah',
-    desc: 'Aktif sebagai pemain inti tim Futsal SMPIT Avicenna dan berpartisipasi dalam berbagai turnamen antarsekolah.',
+    desc:
+        'Aktif sebagai pemain inti tim Futsal SMPIT Avicenna dan berpartisipasi dalam berbagai turnamen antarsekolah.',
   ),
   Achievement(
     icon: Icons.school_outlined,
     tag: 'Akademik',
     title: 'Mahasiswa Informatika Ubhara Jaya',
-    desc: 'Terdaftar aktif di Universitas Bhayangkara Jakarta Raya dengan fokus pada Organisasi Komputer & Mobile Dev.',
+    desc:
+        'Terdaftar aktif di Universitas Bhayangkara Jakarta Raya dengan fokus pada Organisasi Komputer & Mobile Dev.',
   ),
 ];
+
 // ---------- Proyek ----------
 const kProjects = [
   Project(
     category: 'Mobile',
     year: '2026',
     title: 'Terminal UI Portfolio App',
-    desc: 'Aplikasi portofolio Flutter modern bergaya terminal interaktif dengan efek visual kustom dan tata letak responsive.',
-    url: 'https://github.com/username/terminal-portfolio',
+    desc:
+        'Aplikasi portofolio Flutter modern bergaya terminal interaktif dengan efek visual kustom dan tata letak responsive.',
+    url: 'https://github.com/muhamadfikri23092006-ops/portfoliomfr',
     tags: ['Flutter', 'Dart', 'Google Fonts'],
   ),
   Project(
     category: 'Web',
     year: '2026',
     title: 'Personal Web Showcase',
-    desc: 'Website portofolio dan showcase profil modern yang disebarkan secara otomatis melalui platform Vercel.',
-    url: 'https://vercel.com',
+    desc:
+        'Website portofolio dan showcase profil modern yang disebarkan secara otomatis melalui platform Vercel.',
+    url: 'https://portfoliomfr.vercel.app',
     tags: ['Vercel', 'JavaScript', 'HTML/CSS'],
   ),
   Project(
     category: 'Sistem',
     year: '2026',
     title: 'Simulasi Organisasi Komputer',
-    desc: 'Eksperimen arsitektur sistem dan logika instruksi mesin untuk pendalaman mata kuliah Pengantar Organisasi Komputer.',
-    url: 'https://github.com/username/org-komputer-sim',
+    desc:
+        'Eksperimen arsitektur sistem dan logika instruksi mesin untuk pendalaman mata kuliah Pengantar Organisasi Komputer.',
+    url: 'https://github.com/muhamadfikri23092006-ops/org-komputer-sim',
     tags: ['CompOrg', 'Logic', 'Architecture'],
   ),
   Project(
     category: 'Tools',
     year: '2025',
     title: 'Notion Workspace Management',
-    desc: 'Sistem dokumentasi tugas perkuliahan dan manajemen alur kerja proyek yang terstruktur di Notion.',
+    desc:
+        'Sistem dokumentasi tugas perkuliahan dan manajemen alur kerja proyek yang terstruktur di Notion.',
     url: 'https://notion.so',
     tags: ['Notion', 'Productivity', 'Workflow'],
   ),
@@ -267,7 +278,8 @@ const kProjects = [
     category: 'Web',
     year: '2025',
     title: 'Academic & Event Design Pack',
-    desc: 'Perancangan materi visual, presentasi interaktif, dan media promosi acara menggunakan Canva.',
+    desc:
+        'Perancangan materi visual, presentasi interaktif, dan media promosi acara menggunakan Canva.',
     url: 'https://canva.com',
     tags: ['Canva', 'Graphic Design', 'UI Concept'],
   ),
@@ -275,18 +287,18 @@ const kProjects = [
     category: 'Mobile',
     year: '2025',
     title: 'Cross-Platform Mobile App Concept',
-    desc: 'Eksperimen antarmuka dan komponen aplikasi mobile Android/iOS menggunakan framework Flutter.',
-    url: 'https://github.com/username/flutter-mobile-app',
+    desc:
+        'Eksperimen antarmuka dan komponen aplikasi mobile Android/iOS menggunakan framework Flutter.',
+    url: 'https://github.com/muhamadfikri23092006-ops/flutter-mobile-app',
     tags: ['Flutter', 'Dart', 'UI/UX'],
   ),
 ];
 
-// ---------- Kontak & footer ----------
 const kContactIntro =
     'Tertarik berkolaborasi atau sekadar berdiskusi soal teknologi? Hubungi aku lewat kanal di bawah atau isi formulir ini.';
 
 // ============================================================
-// WARNA & FONT  (disampel dari screenshot situs)
+// WARNA & FONT
 // ============================================================
 const bg = Color(0xFF060A13);
 const bgTerminal = Color(0xFF080D19);
@@ -300,7 +312,6 @@ const textMuted = Color(0xFF8892A6);
 const borderColor = Color(0x2600E5FF);
 const kGradient = LinearGradient(colors: [cyan, purple]);
 
-// Warna dengan opacity tanpa withOpacity (supaya bebas warning deprecated).
 Color cyanA(double o) => Color.fromRGBO(0, 229, 255, o);
 Color purpleA(double o) => Color.fromRGBO(124, 77, 255, o);
 Color goldA(double o) => Color.fromRGBO(255, 183, 0, o);
@@ -321,7 +332,6 @@ TextStyle mono({
       height: height,
     );
 
-// Font judul: Space Grotesk (perkiraan, mirip font judul di situs).
 TextStyle heading({
   double size = 28,
   Color color = textPrimary,
@@ -353,13 +363,38 @@ void showToast(BuildContext context, String msg) {
     );
 }
 
-// Sementara: link DISALIN ke clipboard (tanpa paket tambahan).
-// Untuk benar-benar membuka browser: flutter pub add url_launcher,
-// lalu ganti isi fungsi ini dengan launchUrl(Uri.parse(url)).
 Future<void> openLink(BuildContext context, String url) async {
+  try {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      final launched = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+      if (launched) return;
+    }
+  } catch (_) {
+    // Fallback ke Clipboard jika browser tidak dapat membuka tautan
+  }
+
   await Clipboard.setData(ClipboardData(text: url));
   if (!context.mounted) return;
   showToast(context, 'Link disalin: $url');
+}
+
+// ============================================================
+// SCROLL BEHAVIOR (Mendukung Mouse Drag di Web & Desktop)
+// ============================================================
+class AppScrollBehavior extends MaterialScrollBehavior {
+  const AppScrollBehavior();
+
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.trackpad,
+        PointerDeviceKind.stylus,
+      };
 }
 
 // ============================================================
@@ -386,6 +421,7 @@ class PortfolioApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: '$kNameFirst $kNameLast — $kRole',
+      scrollBehavior: const AppScrollBehavior(),
       theme: ThemeData(
         brightness: Brightness.dark,
         scaffoldBackgroundColor: bg,
@@ -402,7 +438,7 @@ class PortfolioApp extends StatelessWidget {
 }
 
 // ============================================================
-// HALAMAN UTAMA: header, drawer menu, scroll antar section
+// HALAMAN UTAMA
 // ============================================================
 class PortfolioPage extends StatefulWidget {
   const PortfolioPage({super.key});
@@ -413,9 +449,9 @@ class PortfolioPage extends StatefulWidget {
 
 class _PortfolioPageState extends State<PortfolioPage> {
   static const _sections = [
-   'Beranda',
+    'Beranda',
     'Tentang',
-    'Pendidikan', 
+    'Pendidikan',
     'Prestasi',
     'Proyek',
     'Kontak',
@@ -443,6 +479,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
   }
 
   void _onScroll() {
+    if (!_scroll.hasClients) return;
     _headerScrolled.value = _scroll.offset > 20;
 
     final pos = _scroll.position;
@@ -452,9 +489,13 @@ class _PortfolioPageState extends State<PortfolioPage> {
     }
     for (int i = _keys.length - 1; i >= 0; i--) {
       final box = _keys[i].currentContext?.findRenderObject() as RenderBox?;
-      if (box != null && box.hasSize && box.localToGlobal(Offset.zero).dy < 200) {
-        _activeNav.value = i;
-        return;
+      if (box != null && box.attached && box.hasSize && !box.size.isEmpty) {
+        try {
+          if (box.localToGlobal(Offset.zero).dy < 200) {
+            _activeNav.value = i;
+            return;
+          }
+        } catch (_) {}
       }
     }
     _activeNav.value = 0;
@@ -477,15 +518,11 @@ class _PortfolioPageState extends State<PortfolioPage> {
       endDrawer: _buildDrawer(),
       body: Stack(
         children: [
-          const Positioned.fill(
-            child: IgnorePointer(child: _Background()),
-          ),
+          const Positioned.fill(child: IgnorePointer(child: _Background())),
           SafeArea(
-            // Konten dibatasi 600px supaya di jendela lebar (Edge/desktop)
-            // tetap tampil seperti layar HP.
             child: Center(
               child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 600),
+                constraints: const BoxConstraints(maxWidth: 680),
                 child: Column(
                   children: [
                     _buildHeader(),
@@ -537,7 +574,6 @@ class _PortfolioPageState extends State<PortfolioPage> {
     );
   }
 
-  // ---------- Header ----------
   Widget _buildHeader() {
     return ValueListenableBuilder<bool>(
       valueListenable: _headerScrolled,
@@ -567,7 +603,6 @@ class _PortfolioPageState extends State<PortfolioPage> {
     );
   }
 
-  // ---------- Drawer ----------
   Widget _buildDrawer() {
     return Drawer(
       backgroundColor: bgTerminal,
@@ -612,8 +647,9 @@ class _PortfolioPageState extends State<PortfolioPage> {
                               style: mono(
                                 size: 15,
                                 color: isActive ? cyan : textPrimary,
-                                weight:
-                                    isActive ? FontWeight.w700 : FontWeight.w500,
+                                weight: isActive
+                                    ? FontWeight.w700
+                                    : FontWeight.w500,
                               ),
                             ),
                           ],
@@ -654,13 +690,17 @@ class _HeroSection extends StatelessWidget {
                   text: '\$ ',
                   style: mono(size: 15, color: cyan, weight: FontWeight.w700),
                 ),
-                TextSpan(text: 'whoami', style: mono(size: 15, color: textMuted)),
+                TextSpan(
+                  text: 'whoami',
+                  style: mono(size: 15, color: textMuted),
+                ),
               ],
             ),
           ),
           const SizedBox(height: 14),
           Wrap(
             spacing: 12,
+            runSpacing: 4,
             children: [
               Text(kNameFirst, style: nameStyle),
               _GradientText(kNameLast, nameStyle),
@@ -711,9 +751,7 @@ class _HeroSection extends StatelessWidget {
           Wrap(
             spacing: 10,
             runSpacing: 10,
-            children: [
-              for (final s in kSocials) _SocialIcon(social: s),
-            ],
+            children: [for (final s in kSocials) _SocialIcon(social: s)],
           ),
           const SizedBox(height: 28),
           const _TerminalCard(),
@@ -725,7 +763,6 @@ class _HeroSection extends StatelessWidget {
   }
 }
 
-// ---------- Teks mengetik + kursor berkedip ----------
 class _TypingText extends StatefulWidget {
   final String text;
   final TextStyle style;
@@ -814,7 +851,6 @@ class _BlinkingCursorState extends State<_BlinkingCursor> {
   }
 }
 
-// ---------- Ikon sosmed kecil di hero ----------
 class _SocialIcon extends StatelessWidget {
   final Social social;
   const _SocialIcon({required this.social});
@@ -858,7 +894,6 @@ class _SocialGlyph extends StatelessWidget {
   }
 }
 
-// ---------- Kartu terminal (cat profil.json) ----------
 class _TerminalCard extends StatelessWidget {
   const _TerminalCard();
 
@@ -980,7 +1015,11 @@ class _TerminalCard extends StatelessWidget {
                   children: [
                     Text(
                       '\$ ',
-                      style: mono(size: 13, color: cyan, weight: FontWeight.w700),
+                      style: mono(
+                        size: 13,
+                        color: cyan,
+                        weight: FontWeight.w700,
+                      ),
                     ),
                     const _BlinkingCursor(),
                   ],
@@ -994,13 +1033,7 @@ class _TerminalCard extends StatelessWidget {
   }
 }
 
-// ---------- Foto dengan efek Iron Man (ketuk untuk nyala/mati) ----------
-// Agar foto asli tampil:
-//  1. buat folder assets/ di root proyek, simpan fotomu sebagai foto.jpg
-//  2. di pubspec.yaml (bagian flutter:) tambahkan:
-//       assets:
-//         - assets/foto.jpg
-//  Jangan daftarkan dulu kalau filenya belum ada (build akan gagal).
+// ---------- Foto dengan Efek Iron Man ----------
 class _IronPhoto extends StatefulWidget {
   const _IronPhoto();
 
@@ -1088,7 +1121,8 @@ class _IronPhotoState extends State<_IronPhoto> {
                       child: Image.asset(
                         kPhotoAsset,
                         fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) => _placeholder(),
+                        errorBuilder: (context, error, stackTrace) =>
+                            _placeholder(),
                       ),
                     ),
                   ),
@@ -1211,7 +1245,8 @@ class _ScanLineState extends State<_ScanLine>
       builder: (context, _) {
         final t = _c.value;
         final top = -0.08 + 1.16 * t;
-        final opacity = t < 0.12 ? t / 0.12 : (t > 0.88 ? (1 - t) / 0.12 : 1.0);
+        final opacity =
+            t < 0.12 ? t / 0.12 : (t > 0.88 ? (1 - t) / 0.12 : 1.0);
         return Align(
           alignment: Alignment(0, 2 * top - 1),
           child: Opacity(
@@ -1311,8 +1346,16 @@ class _ArcReactorState extends State<_ArcReactor>
                       stops: [0.0, 0.18, 0.40, 0.62, 0.72],
                     ),
                     boxShadow: [
-                      BoxShadow(color: cyanA(0.8), blurRadius: 24, spreadRadius: 6),
-                      BoxShadow(color: cyanA(0.3), blurRadius: 55, spreadRadius: 18),
+                      BoxShadow(
+                        color: cyanA(0.8),
+                        blurRadius: 24,
+                        spreadRadius: 6,
+                      ),
+                      BoxShadow(
+                        color: cyanA(0.3),
+                        blurRadius: 55,
+                        spreadRadius: 18,
+                      ),
                     ],
                   ),
                 ),
@@ -1360,14 +1403,19 @@ class _HudCorner extends StatelessWidget {
 }
 
 // ============================================================
-// TENTANG (// 01)
+// TENTANG (01)
 // ============================================================
 class _AboutSection extends StatelessWidget {
   const _AboutSection();
 
   @override
   Widget build(BuildContext context) {
-    final base = heading(size: 15, color: textMuted, weight: FontWeight.w400, height: 1.75);
+    final base = heading(
+      size: 15,
+      color: textMuted,
+      weight: FontWeight.w400,
+      height: 1.75,
+    );
     final bold = base.copyWith(color: textPrimary, fontWeight: FontWeight.w700);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
@@ -1395,13 +1443,16 @@ class _AboutSection extends StatelessWidget {
           const SizedBox(height: 28),
           LayoutBuilder(
             builder: (context, c) {
-              final w = (c.maxWidth - 12) / 2;
+              final w = math.max(0.0, (c.maxWidth - 12) / 2);
               return Wrap(
                 spacing: 12,
                 runSpacing: 12,
                 children: [
                   for (final s in kStats)
-                    SizedBox(width: w, child: _StatCard(stat: s)),
+                    SizedBox(
+                      width: w,
+                      child: _StatCard(stat: s),
+                    ),
                 ],
               );
             },
@@ -1427,7 +1478,9 @@ class _AboutSection extends StatelessWidget {
                     Wrap(
                       spacing: 8,
                       runSpacing: 8,
-                      children: [for (final s in g.items) _Chip(s, accent: true)],
+                      children: [
+                        for (final s in g.items) _Chip(s, accent: true),
+                      ],
                     ),
                   ],
                 ),
@@ -1461,7 +1514,10 @@ class _StatCard extends StatelessWidget {
             style: heading(size: 34, spacing: -1),
           ),
           const SizedBox(height: 4),
-          Text(stat.label, style: mono(size: 11.5, color: textMuted, height: 1.4)),
+          Text(
+            stat.label,
+            style: mono(size: 11.5, color: textMuted, height: 1.4),
+          ),
         ],
       ),
     );
@@ -1469,7 +1525,7 @@ class _StatCard extends StatelessWidget {
 }
 
 // ============================================================
-// KARIR (// 02) — timeline vertikal
+// KARIR (02)
 // ============================================================
 class _CareerSection extends StatelessWidget {
   const _CareerSection();
@@ -1481,7 +1537,7 @@ class _CareerSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const _SectionTitle(number: '02', title: 'Karir'),
+          const _SectionTitle(number: '02', title: 'Pendidikan & Karir'),
           const SizedBox(height: 28),
           for (int i = 0; i < kCareer.length; i++)
             _Reveal(
@@ -1510,7 +1566,6 @@ class _CareerTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // garis vertikal
         Positioned(
           left: 5,
           width: 2,
@@ -1519,7 +1574,6 @@ class _CareerTile extends StatelessWidget {
           height: last ? 28 : null,
           child: ColoredBox(color: cyanA(0.22)),
         ),
-        // titik node
         Positioned(
           left: 0,
           top: 22,
@@ -1534,7 +1588,6 @@ class _CareerTile extends StatelessWidget {
             ),
           ),
         ),
-        // kartu
         Padding(
           padding: EdgeInsets.only(left: 30, bottom: last ? 0 : 18),
           child: SizedBox(
@@ -1579,7 +1632,9 @@ class _CareerTile extends StatelessWidget {
                   Wrap(
                     spacing: 6,
                     runSpacing: 6,
-                    children: [for (final t in item.tags) _Chip(t, accent: true)],
+                    children: [
+                      for (final t in item.tags) _Chip(t, accent: true),
+                    ],
                   ),
                 ],
               ),
@@ -1592,7 +1647,7 @@ class _CareerTile extends StatelessWidget {
 }
 
 // ============================================================
-// PRESTASI (// 03)
+// PRESTASI (03)
 // ============================================================
 class _AchievementsSection extends StatelessWidget {
   const _AchievementsSection();
@@ -1609,7 +1664,7 @@ class _AchievementsSection extends StatelessWidget {
           LayoutBuilder(
             builder: (context, c) {
               final cols = c.maxWidth >= 480 ? 2 : 1;
-              final w = (c.maxWidth - 12 * (cols - 1)) / cols;
+              final w = math.max(0.0, (c.maxWidth - 12 * (cols - 1)) / cols);
               return Wrap(
                 spacing: 12,
                 runSpacing: 12,
@@ -1661,7 +1716,12 @@ class _AchievementCard extends StatelessWidget {
           const SizedBox(height: 14),
           Text(
             item.tag.toUpperCase(),
-            style: mono(size: 10.5, color: cyan, weight: FontWeight.w600, spacing: 1.2),
+            style: mono(
+              size: 10.5,
+              color: cyan,
+              weight: FontWeight.w600,
+              spacing: 1.2,
+            ),
           ),
           const SizedBox(height: 6),
           Text(item.title, style: heading(size: 16, height: 1.3)),
@@ -1682,7 +1742,7 @@ class _AchievementCard extends StatelessWidget {
 }
 
 // ============================================================
-// PROYEK (// 04) — dengan filter kategori
+// PROYEK (04)
 // ============================================================
 class _ProjectsSection extends StatefulWidget {
   const _ProjectsSection();
@@ -1803,12 +1863,30 @@ class _ProjectCard extends StatelessWidget {
                 Wrap(
                   spacing: 6,
                   runSpacing: 6,
-                  children: [for (final t in project.tags) _Chip(t, accent: true)],
+                  children: [
+                    for (final t in project.tags) _Chip(t, accent: true),
+                  ],
                 ),
                 const SizedBox(height: 14),
-                Text(
-                  'Buka proyek →',
-                  style: mono(size: 12.5, color: cyan, weight: FontWeight.w600),
+                Row(
+                  children: [
+                    Text(
+                      'Buka proyek ',
+                      style: mono(
+                        size: 12.5,
+                        color: cyan,
+                        weight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      '→',
+                      style: mono(
+                        size: 14,
+                        color: cyan,
+                        weight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -1820,7 +1898,7 @@ class _ProjectCard extends StatelessWidget {
 }
 
 // ============================================================
-// KONTAK (// 05) — link sosmed + form (mode demo)
+// KONTAK (05)
 // ============================================================
 class _ContactSection extends StatefulWidget {
   const _ContactSection();
@@ -1843,10 +1921,30 @@ class _ContactSectionState extends State<_ContactSection> {
     super.dispose();
   }
 
-  void _submit() {
+  Future<void> _submit() async {
     if (_form.currentState?.validate() ?? false) {
-      // TODO: hubungkan ke email/server/Firebase di sini.
-      showToast(context, 'Pesan terkirim! (mode demo)');
+      final name = _name.text.trim();
+      final senderEmail = _email.text.trim();
+      final msg = _message.text.trim();
+
+      // Membuka email client jika tersedia
+      final mailUri = Uri(
+        scheme: 'mailto',
+        path: 'fikri.informatika@gmail.com',
+        queryParameters: {
+          'subject': 'Pesan Portofolio dari $name ($senderEmail)',
+          'body': msg,
+        },
+      );
+
+      try {
+        if (await canLaunchUrl(mailUri)) {
+          await launchUrl(mailUri);
+        }
+      } catch (_) {}
+
+      if (!mounted) return;
+      showToast(context, 'Pesan terkirim! Terima kasih, $name.');
       _name.clear();
       _email.clear();
       _message.clear();
@@ -1869,7 +1967,12 @@ class _ContactSectionState extends State<_ContactSection> {
       children: [
         Text(
           label.toUpperCase(),
-          style: mono(size: 11, color: textMuted, weight: FontWeight.w600, spacing: 1),
+          style: mono(
+            size: 11,
+            color: textMuted,
+            weight: FontWeight.w600,
+            spacing: 1,
+          ),
         ),
         const SizedBox(height: 8),
         TextFormField(
@@ -1884,7 +1987,10 @@ class _ContactSectionState extends State<_ContactSection> {
             filled: true,
             fillColor: bgTerminal,
             isDense: true,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 14,
+              vertical: 14,
+            ),
             border: border(borderColor),
             enabledBorder: border(borderColor),
             focusedBorder: border(cyan),
@@ -1940,8 +2046,9 @@ class _ContactSectionState extends State<_ContactSection> {
                     'Nama',
                     _name,
                     'Nama kamu',
-                    validator: (v) =>
-                        (v == null || v.trim().isEmpty) ? 'Nama wajib diisi' : null,
+                    validator: (v) => (v == null || v.trim().isEmpty)
+                        ? 'Nama wajib diisi'
+                        : null,
                   ),
                   const SizedBox(height: 14),
                   _field(
@@ -1963,14 +2070,15 @@ class _ContactSectionState extends State<_ContactSection> {
                     _message,
                     'Ceritakan proyek atau idemu...',
                     maxLines: 4,
-                    validator: (v) =>
-                        (v == null || v.trim().isEmpty) ? 'Pesan wajib diisi' : null,
+                    validator: (v) => (v == null || v.trim().isEmpty)
+                        ? 'Pesan wajib diisi'
+                        : null,
                   ),
                   const SizedBox(height: 18),
                   _GradientButton(label: 'Kirim Pesan →', onTap: _submit),
                   const SizedBox(height: 12),
                   Text(
-                    '// form ini masih mode demo',
+                    '// formulir terhubung langsung',
                     textAlign: TextAlign.center,
                     style: mono(size: 11, color: textMuted),
                   ),
@@ -2033,7 +2141,10 @@ class _LinkTile extends StatelessWidget {
                     ],
                   ),
                 ),
-                Text('→', style: mono(size: 16, color: cyan, weight: FontWeight.w700)),
+                Text(
+                  '→',
+                  style: mono(size: 16, color: cyan, weight: FontWeight.w700),
+                ),
               ],
             ),
           ),
@@ -2064,7 +2175,10 @@ class _FooterSection extends StatelessWidget {
               style: mono(size: 12.5, color: textMuted),
               children: [
                 const TextSpan(text: '\$ echo "Dibangun dengan '),
-                TextSpan(text: '♥', style: mono(size: 12.5, color: cyan)),
+                TextSpan(
+                  text: '♥',
+                  style: mono(size: 12.5, color: cyan),
+                ),
                 const TextSpan(text: ' dan banyak kopi"'),
               ],
             ),
@@ -2095,7 +2209,11 @@ class _FooterSection extends StatelessWidget {
                     child: Center(
                       child: Text(
                         '↑',
-                        style: mono(size: 18, color: cyan, weight: FontWeight.w700),
+                        style: mono(
+                          size: 18,
+                          color: cyan,
+                          weight: FontWeight.w700,
+                        ),
                       ),
                     ),
                   ),
@@ -2180,7 +2298,12 @@ class _SectionTitle extends StatelessWidget {
       children: [
         Text(
           '// $number',
-          style: mono(size: 13, color: cyan, weight: FontWeight.w600, spacing: 1),
+          style: mono(
+            size: 13,
+            color: cyan,
+            weight: FontWeight.w600,
+            spacing: 1,
+          ),
         ),
         const SizedBox(height: 8),
         Text(title, style: heading(size: 30, spacing: -0.8, height: 1.15)),
@@ -2302,7 +2425,6 @@ class _OutlineButton extends StatelessWidget {
   }
 }
 
-// Mengubah "teks **tebal** biasa" menjadi potongan TextSpan.
 List<InlineSpan> _markup(String s, TextStyle base, TextStyle bold) {
   final parts = s.split('**');
   return [
@@ -2311,9 +2433,7 @@ List<InlineSpan> _markup(String s, TextStyle base, TextStyle bold) {
   ];
 }
 
-// ---------- Animasi saat muncul di layar ----------
-// Memanggil builder dengan visible=true begitu widget masuk area layar
-// (sekali saja). Tidak butuh paket tambahan.
+// ---------- Animasi saat Muncul di Layar ----------
 class _OnVisible extends StatefulWidget {
   final Widget Function(BuildContext context, bool visible) builder;
   final Duration delay;
@@ -2349,23 +2469,30 @@ class _OnVisibleState extends State<_OnVisible> {
   void _check() {
     if (_triggered || !mounted) return;
     final ro = context.findRenderObject();
-    if (ro is! RenderBox || !ro.attached || !ro.hasSize) return;
-    if (ro.localToGlobal(Offset.zero).dy < _screenH * 0.92) {
-      _triggered = true;
-      _position?.removeListener(_check);
-      if (widget.delay == Duration.zero) {
-        setState(() => _visible = true);
-      } else {
-        Future.delayed(widget.delay, () {
-          if (mounted) setState(() => _visible = true);
-        });
-      }
+    if (ro is! RenderBox || !ro.attached || !ro.hasSize || ro.size.isEmpty) {
+      return;
     }
+
+    try {
+      if (ro.localToGlobal(Offset.zero).dy < _screenH * 0.95) {
+        _triggered = true;
+        _position?.removeListener(_check);
+        if (widget.delay == Duration.zero) {
+          setState(() => _visible = true);
+        } else {
+          Future.delayed(widget.delay, () {
+            if (mounted) setState(() => _visible = true);
+          });
+        }
+      }
+    } catch (_) {}
   }
 
   @override
   void dispose() {
-    _position?.removeListener(_check);
+    try {
+      _position?.removeListener(_check);
+    } catch (_) {}
     super.dispose();
   }
 
@@ -2401,7 +2528,11 @@ class _CountUp extends StatelessWidget {
   final int value;
   final String suffix;
   final TextStyle style;
-  const _CountUp({required this.value, required this.suffix, required this.style});
+  const _CountUp({
+    required this.value,
+    required this.suffix,
+    required this.style,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -2417,7 +2548,7 @@ class _CountUp extends StatelessWidget {
 }
 
 // ============================================================
-// LATAR: grid tipis + jaring titik yang bergerak pelan
+// LATAR PARTIKEL & GRID SIBER
 // ============================================================
 class _Particle {
   final double x, y, vx, vy;
@@ -2450,7 +2581,8 @@ class _BackgroundState extends State<_Background>
         (rnd.nextDouble() - 0.5) * 0.02,
       ),
     );
-    _ticker = createTicker((d) => _time.value = d.inMicroseconds / 1e6)..start();
+    _ticker = createTicker((d) => _time.value = d.inMicroseconds / 1e6)
+      ..start();
   }
 
   @override
@@ -2478,7 +2610,6 @@ class _BackgroundPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // grid
     final grid = Paint()
       ..color = const Color(0x0800E5FF)
       ..strokeWidth = 1;
@@ -2490,7 +2621,6 @@ class _BackgroundPainter extends CustomPainter {
       canvas.drawLine(Offset(0, y), Offset(size.width, y), grid);
     }
 
-    // jaring titik
     final t = time.value;
     final pts = <Offset>[
       for (final p in particles)
