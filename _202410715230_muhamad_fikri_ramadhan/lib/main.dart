@@ -1,24 +1,26 @@
 // ============================================================
-// TEMPLATE PORTOFOLIO GAYA TERMINAL (FLUTTER, MOBILE FIRST & WEB)
+// TEMPLATE PORTOFOLIO "KERTAS & TINTA" (FLUTTER, RESPONSIF HP + WEB)
+// ------------------------------------------------------------
+// Cara ganti isi : edit bagian "DATA" tepat di bawah ini saja.
+// Paket wajib    : google_fonts  ->  flutter pub add google_fonts
+// Foto (opsional): taruh di assets/foto.jpg lalu daftarkan di
+//                  pubspec.yaml (lihat catatan di _IronPhoto).
 // ============================================================
-import 'dart:async';
 import 'dart:math' as math;
-import 'dart:ui' show PointerDeviceKind;
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart' show ValueNotifier;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 // ============================================================
-// DATA  —  MUHAMAD FIKRI RAMADHAN
+// DATA  —  EDIT BAGIAN INI UNTUK MENGGANTI ISI
 // ============================================================
 class Social {
   final String label, handle, url;
-  final IconData? icon;
-  final String? glyph;
+  final IconData? icon; // pakai icon ...
+  final String? glyph; // ... atau teks pendek, mis. "in"
   const Social({
     required this.label,
     required this.handle,
@@ -86,24 +88,19 @@ const kPrimaryButton = 'Hubungi Saya';
 const kSecondaryButton = 'Lihat Proyek';
 const kPhotoAsset = 'assets/foto.jpg';
 
-// Kartu terminal di hero
-const kTerminalUser = 'fikri@portfolio: ~';
+// Kartu profil di hero
+const kHandle = 'fikri@portfolio: ~';
 const kProfile = <String, Object>{
   'nama': 'Muhamad Fikri Ramadhan',
   'pekerjaan': 'Mahasiswa Informatika',
   'akademisi': 'Informatika, Universitas Bhayangkara Jakarta Raya',
-  'riset': [
-    'Computer Architecture',
-    'Mobile Development',
-    'Software Engineering',
-  ],
+  'riset': ['Computer Architecture', 'Mobile Development', 'Software Engineering'],
   'lokasi': 'Bekasi, Indonesia',
 };
-const kUptime = 'Semester 5';
-const kTerminalOk =
-    'All systems fully operational, Sir. At your service. #JARVIS';
+const kExperienceLine = 'Semester 5';
+const kStatusLine = '[OK] All systems fully operational, Sir. At your service. #JARVIS';
 
-// ---------- Sosial Media ----------
+// ---------- Sosial media (dipakai di hero & kontak) ----------
 const kSocials = [
   Social(
     label: 'LinkedIn',
@@ -127,11 +124,12 @@ const kSocials = [
     label: 'Vercel Showcase',
     handle: 'portfoliomfr.vercel.app',
     url: 'https://portfoliomfr.vercel.app',
-    icon: Icons.language,
+    icon: Icons.change_history,
   ),
 ];
 
 // ---------- Tentang ----------
+// Tanda **teks** membuat teks jadi tebal (dengan stabilo kuning).
 const kAboutParagraphs = [
   'Halo! Saya **Muhamad Fikri Ramadhan**, seorang **Mahasiswa Informatika** yang tertarik pada teknologi, data, dan pengembangan perangkat lunak.',
   'Saat ini saya sedang kuliah di **Universitas Bhayangkara Jakarta Raya** dan aktif sebagai **Event Organizer** di **UKM DSC**.',
@@ -151,10 +149,10 @@ const kStats = [
 const kSkills = [
   SkillGroup('Data & AI', ['Python', 'SQL', 'Machine Learning', 'ETL']),
   SkillGroup('Web & Software', ['PHP', 'Laravel', 'Flutter', 'JavaScript']),
-  SkillGroup('Tools', ['Git', 'Docker', 'Linux(ubuntu)', 'VS Code']),
+  SkillGroup('Tools', ['Git', 'Docker', 'Linux (Ubuntu)', 'VS Code']),
 ];
 
-// ---------- Karir & Pendidikan ----------
+// ---------- Karir ----------
 const kCareer = [
   CareerItem(
     period: '2024 — Sekarang',
@@ -177,7 +175,7 @@ const kCareer = [
     title: 'Sekolah Menengah Pertama (SMP)',
     org: 'SMPIT Avicenna',
     desc:
-        'Aktif di ekskul PMR dan Futsal, meraih Juara 1 Perlombaan Pertolongan Pertama (PP) Tim sebanyak 2 kali, serta menyelesaikan hafalan 2 Juz Al-Qur\'an.',
+        "Aktif di ekskul PMR dan Futsal, meraih Juara 1 Perlombaan Pertolongan Pertama (PP) Tim sebanyak 2 kali, serta menyelesaikan hafalan 2 Juz Al-Qur'an.",
     tags: ['Futsal', 'PMR', '2 Juz Alquran'],
   ),
   CareerItem(
@@ -200,25 +198,25 @@ const kAchievements = [
         'Berhasil meraih Juara 1 tingkat regional sebanyak 2 kali dalam kategori Pertolongan Pertama (PP) Tim melalui ekskul PMR.',
   ),
   Achievement(
-    icon: Icons.groups_outlined,
+    icon: Icons.flag_outlined,
     tag: 'Kepemimpinan',
     title: 'Kordiv Acara PHBI ROHIS',
     desc:
         'Memimpin perencanaan dan pelaksanaan seluruh kegiatan perayaan hari besar Islam di lingkungan MAN 1 Kota Bekasi.',
   ),
   Achievement(
-    icon: Icons.assignment_turned_in_outlined,
+    icon: Icons.groups_outlined,
     tag: 'Organisasi',
     title: 'Sekretaris Karang Taruna RW 07',
     desc:
         'Mengelola administrasi, penyusunan dokumen resmi, serta koordinasi kegiatan kepemudaan warga di tingkat RW.',
   ),
   Achievement(
-    icon: Icons.auto_stories_outlined,
+    icon: Icons.menu_book_outlined,
     tag: 'Keagamaan',
-    title: 'Hafiz 2 Juz Al-Qur\'an',
+    title: "Hafiz 2 Juz Al-Qur'an",
     desc:
-        'Menyelesaikan program hafalan 2 Juz Al-Qur\'an dengan baik selama menempuh studi di SMPIT Avicenna.',
+        "Menyelesaikan program hafalan 2 Juz Al-Qur'an dengan baik selama menempuh studi di SMPIT Avicenna.",
   ),
   Achievement(
     icon: Icons.sports_soccer_outlined,
@@ -294,37 +292,71 @@ const kProjects = [
   ),
 ];
 
+// ---------- Kontak & footer ----------
 const kContactIntro =
     'Tertarik berkolaborasi atau sekadar berdiskusi soal teknologi? Hubungi aku lewat kanal di bawah atau isi formulir ini.';
+// Catatan kecil di bawah form. Ganti setelah form benar-benar terhubung.
+const kFormNote = '// form ini masih mode demo';
+const kFooterNote = '\$ echo "Dibangun dengan ♥ dan banyak kopi"';
 
 // ============================================================
-// WARNA & FONT
+// PALET & FONT  —  tema "Kertas & Tinta" (neo-brutalist)
 // ============================================================
-const bg = Color(0xFF060A13);
-const bgTerminal = Color(0xFF080D19);
-const bgTerminalBar = Color(0xFF121722);
-const cyan = Color(0xFF00E5FF);
-const purple = Color(0xFF7C4DFF);
-const green = Color(0xFF7EE787);
-const gold = Color(0xFFFFB700);
-const textPrimary = Color(0xFFE6EDF7);
-const textMuted = Color(0xFF8892A6);
-const borderColor = Color(0x2600E5FF);
-const kGradient = LinearGradient(colors: [cyan, purple]);
+// Konsep: kertas krem + garis tinta tebal + bayangan keras tanpa
+// blur + warna pastel ala stabilo. Semua warna & font ada di blok
+// ini, jadi mengganti tema cukup dengan mengubah blok ini.
+const paper = Color(0xFFF4EEE3); // latar kertas
+const paperDark = Color(0xFFE8DFCC);
+const ink = Color(0xFF15130F); // tinta: teks + semua garis tepi
+const cardBg = Color(0xFFFFFFFF);
+const tomato = Color(0xFFFF4F2E); // aksen utama
+const sun = Color(0xFFFFC93C); // kuning stabilo
+const sky = Color(0xFF7CC8FF);
+const lilac = Color(0xFFC3B1FF);
+const mint = Color(0xFF8FE3B8);
+const textPrimary = ink;
+const textMuted = Color(0xFF55504A);
+const kPastels = [sun, sky, lilac, mint];
 
-Color cyanA(double o) => Color.fromRGBO(0, 229, 255, o);
-Color purpleA(double o) => Color.fromRGBO(124, 77, 255, o);
+// Khusus efek "Iron Man" pada foto.
+const ironRed = Color(0xFFFF2D2D);
+const ironGold = Color(0xFFFFB700);
+const arcCyan = Color(0xFF00E5FF);
+
 Color goldA(double o) => Color.fromRGBO(255, 183, 0, o);
 Color redA(double o) => Color.fromRGBO(255, 45, 45, o);
+Color arcA(double o) => Color.fromRGBO(0, 229, 255, o);
 
+// Teks yang sama selalu dapat warna pastel yang sama
+// (mis. semua tag "Flutter" berwarna sama).
+Color pastelFor(String s) =>
+    kPastels[s.codeUnits.fold<int>(0, (a, b) => a + b) % kPastels.length];
+
+// Kotak bergaya brutal: garis tinta tebal + bayangan keras (tanpa blur).
+BoxDecoration brutal({
+  Color fill = cardBg,
+  double radius = 14,
+  double shadow = 5,
+  double border = 2,
+}) =>
+    BoxDecoration(
+      color: fill,
+      borderRadius: BorderRadius.circular(radius),
+      border: Border.all(color: ink, width: border),
+      boxShadow: shadow <= 0
+          ? null
+          : [BoxShadow(color: ink, offset: Offset(shadow, shadow))],
+    );
+
+// Tiga font: label = Space Mono, teks isi = DM Sans, judul = Archivo Black.
 TextStyle mono({
   double size = 14,
-  Color color = textPrimary,
-  FontWeight weight = FontWeight.w500,
+  Color color = ink,
+  FontWeight weight = FontWeight.w400,
   double? spacing,
   double? height,
 }) =>
-    GoogleFonts.jetBrainsMono(
+    GoogleFonts.spaceMono(
       fontSize: size,
       color: color,
       fontWeight: weight,
@@ -332,20 +364,136 @@ TextStyle mono({
       height: height,
     );
 
+TextStyle body({
+  double size = 15,
+  Color color = ink,
+  FontWeight weight = FontWeight.w400,
+  double? spacing,
+  double? height = 1.6,
+}) =>
+    GoogleFonts.dmSans(
+      fontSize: size,
+      color: color,
+      fontWeight: weight,
+      letterSpacing: spacing,
+      height: height,
+    );
+
+// weight >= w700 -> judul tebal (Archivo Black, hanya punya 1 bobot).
+// weight di bawahnya -> teks isi (DM Sans).
 TextStyle heading({
   double size = 28,
-  Color color = textPrimary,
+  Color color = ink,
   FontWeight weight = FontWeight.w700,
   double? spacing,
   double? height,
-}) =>
-    GoogleFonts.spaceGrotesk(
+}) {
+  if (weight.value >= 700) {
+    return GoogleFonts.archivoBlack(
       fontSize: size,
       color: color,
-      fontWeight: weight,
       letterSpacing: spacing,
       height: height,
     );
+  }
+  return GoogleFonts.dmSans(
+    fontSize: size,
+    color: color,
+    fontWeight: weight,
+    letterSpacing: spacing,
+    height: height,
+  );
+}
+
+// ============================================================
+// RESPONSIF (web + mobile)
+// ------------------------------------------------------------
+//   < 700px    : HP      (1 kolom, menu hamburger)
+//   700-899px  : tablet  (padding lebih lega, menu hamburger)
+//   >= 900px   : web     (2-3 kolom, menu tampil di header)
+// ============================================================
+const kMaxContent = 1100.0; // lebar maksimum konten di layar lebar
+const kWideBreak = 900.0; // batas mulai layout web
+
+bool isWide(BuildContext c) => MediaQuery.of(c).size.width >= kWideBreak;
+double pagePad(BuildContext c) => MediaQuery.of(c).size.width >= 700 ? 40 : 20;
+double sectionPad(BuildContext c) => isWide(c) ? 72 : 40;
+
+// Membatasi lebar konten dan menaruhnya di tengah layar.
+class _Page extends StatelessWidget {
+  final Widget child;
+  const _Page({required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.topCenter,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: kMaxContent),
+        child: child,
+      ),
+    );
+  }
+}
+
+// Grid responsif. Jumlah kolom ditentukan fungsi `columns` dari lebar
+// yang tersedia, dan tinggi kartu dalam satu baris disamakan.
+class _Grid extends StatelessWidget {
+  final List<Widget> children;
+  final int Function(double width) columns;
+  final double gap;
+  const _Grid({required this.children, required this.columns, this.gap = 14});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, c) {
+        final cols = columns(c.maxWidth);
+        if (cols <= 1) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              for (int i = 0; i < children.length; i++)
+                Padding(
+                  padding: EdgeInsets.only(
+                    bottom: i == children.length - 1 ? 0 : gap,
+                  ),
+                  child: children[i],
+                ),
+            ],
+          );
+        }
+        final rows = <Widget>[];
+        for (int i = 0; i < children.length; i += cols) {
+          final slice = children.sublist(i, math.min(i + cols, children.length));
+          rows.add(
+            Padding(
+              padding: EdgeInsets.only(
+                bottom: i + cols >= children.length ? 0 : gap,
+              ),
+              child: IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    for (int j = 0; j < cols; j++) ...[
+                      if (j > 0) SizedBox(width: gap),
+                      Expanded(
+                        child: j < slice.length
+                            ? slice[j]
+                            : const SizedBox.shrink(),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+        return Column(children: rows);
+      },
+    );
+  }
+}
 
 void showToast(BuildContext context, String msg) {
   ScaffoldMessenger.of(context)
@@ -354,47 +502,26 @@ void showToast(BuildContext context, String msg) {
       SnackBar(
         content: Text(
           msg,
-          style: mono(size: 12.5, color: bg, weight: FontWeight.w600),
+          style: mono(size: 12.5, color: paper, weight: FontWeight.w700),
         ),
-        backgroundColor: cyan,
+        backgroundColor: ink,
         behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+          side: const BorderSide(color: sun, width: 2),
+        ),
         duration: const Duration(seconds: 2),
       ),
     );
 }
 
+// Sementara: link DISALIN ke clipboard (tanpa paket tambahan).
+// Untuk benar-benar membuka browser: flutter pub add url_launcher,
+// lalu ganti isi fungsi ini dengan launchUrl(Uri.parse(url)).
 Future<void> openLink(BuildContext context, String url) async {
-  try {
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      final launched = await launchUrl(
-        uri,
-        mode: LaunchMode.externalApplication,
-      );
-      if (launched) return;
-    }
-  } catch (_) {
-    // Fallback ke Clipboard jika browser tidak dapat membuka tautan
-  }
-
   await Clipboard.setData(ClipboardData(text: url));
   if (!context.mounted) return;
   showToast(context, 'Link disalin: $url');
-}
-
-// ============================================================
-// SCROLL BEHAVIOR (Mendukung Mouse Drag di Web & Desktop)
-// ============================================================
-class AppScrollBehavior extends MaterialScrollBehavior {
-  const AppScrollBehavior();
-
-  @override
-  Set<PointerDeviceKind> get dragDevices => {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.mouse,
-        PointerDeviceKind.trackpad,
-        PointerDeviceKind.stylus,
-      };
 }
 
 // ============================================================
@@ -405,9 +532,9 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.light,
-      systemNavigationBarColor: bg,
-      systemNavigationBarIconBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
+      systemNavigationBarColor: paper,
+      systemNavigationBarIconBrightness: Brightness.dark,
     ),
   );
   runApp(const PortfolioApp());
@@ -421,14 +548,18 @@ class PortfolioApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: '$kNameFirst $kNameLast — $kRole',
-      scrollBehavior: const AppScrollBehavior(),
       theme: ThemeData(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: bg,
-        colorScheme: const ColorScheme.dark(
-          primary: cyan,
-          secondary: purple,
-          surface: bgTerminal,
+        brightness: Brightness.light,
+        scaffoldBackgroundColor: paper,
+        colorScheme: const ColorScheme.light(
+          primary: tomato,
+          secondary: sun,
+          surface: paper,
+          onSurface: ink,
+        ),
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: tomato,
+          selectionColor: Color(0x66FFC93C),
         ),
         useMaterial3: true,
       ),
@@ -438,7 +569,7 @@ class PortfolioApp extends StatelessWidget {
 }
 
 // ============================================================
-// HALAMAN UTAMA
+// HALAMAN UTAMA: header, drawer menu, scroll antar section
 // ============================================================
 class PortfolioPage extends StatefulWidget {
   const PortfolioPage({super.key});
@@ -451,7 +582,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
   static const _sections = [
     'Beranda',
     'Tentang',
-    'Pendidikan',
+    'Karir',
     'Prestasi',
     'Proyek',
     'Kontak',
@@ -479,7 +610,6 @@ class _PortfolioPageState extends State<PortfolioPage> {
   }
 
   void _onScroll() {
-    if (!_scroll.hasClients) return;
     _headerScrolled.value = _scroll.offset > 20;
 
     final pos = _scroll.position;
@@ -489,13 +619,9 @@ class _PortfolioPageState extends State<PortfolioPage> {
     }
     for (int i = _keys.length - 1; i >= 0; i--) {
       final box = _keys[i].currentContext?.findRenderObject() as RenderBox?;
-      if (box != null && box.attached && box.hasSize && !box.size.isEmpty) {
-        try {
-          if (box.localToGlobal(Offset.zero).dy < 200) {
-            _activeNav.value = i;
-            return;
-          }
-        } catch (_) {}
+      if (box != null && box.hasSize && box.localToGlobal(Offset.zero).dy < 200) {
+        _activeNav.value = i;
+        return;
       }
     }
     _activeNav.value = 0;
@@ -518,55 +644,55 @@ class _PortfolioPageState extends State<PortfolioPage> {
       endDrawer: _buildDrawer(),
       body: Stack(
         children: [
-          const Positioned.fill(child: IgnorePointer(child: _Background())),
+          const Positioned.fill(
+            child: IgnorePointer(child: _Background()),
+          ),
           SafeArea(
-            child: Center(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 680),
-                child: Column(
-                  children: [
-                    _buildHeader(),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        controller: _scroll,
-                        physics: const BouncingScrollPhysics(),
-                        child: Column(
-                          children: [
-                            KeyedSubtree(
-                              key: _keys[0],
-                              child: _HeroSection(
-                                onPrimary: () => _goTo(5),
-                                onSecondary: () => _goTo(4),
-                              ),
+            child: Column(
+              children: [
+                _buildHeader(),
+                Expanded(
+                  child: SingleChildScrollView(
+                    controller: _scroll,
+                    physics: const BouncingScrollPhysics(),
+                    child: Column(
+                      children: [
+                        KeyedSubtree(
+                          key: _keys[0],
+                          child: _Page(
+                            child: _HeroSection(
+                              onPrimary: () => _goTo(5),
+                              onSecondary: () => _goTo(4),
                             ),
-                            KeyedSubtree(
-                              key: _keys[1],
-                              child: const _AboutSection(),
-                            ),
-                            KeyedSubtree(
-                              key: _keys[2],
-                              child: const _CareerSection(),
-                            ),
-                            KeyedSubtree(
-                              key: _keys[3],
-                              child: const _AchievementsSection(),
-                            ),
-                            KeyedSubtree(
-                              key: _keys[4],
-                              child: const _ProjectsSection(),
-                            ),
-                            KeyedSubtree(
-                              key: _keys[5],
-                              child: const _ContactSection(),
-                            ),
-                            _FooterSection(onTop: () => _goTo(0)),
-                          ],
+                          ),
                         ),
-                      ),
+                        const _TickerBand(),
+                        KeyedSubtree(
+                          key: _keys[1],
+                          child: const _Page(child: _AboutSection()),
+                        ),
+                        KeyedSubtree(
+                          key: _keys[2],
+                          child: const _Page(child: _CareerSection()),
+                        ),
+                        KeyedSubtree(
+                          key: _keys[3],
+                          child: const _Page(child: _AchievementsSection()),
+                        ),
+                        KeyedSubtree(
+                          key: _keys[4],
+                          child: const _Page(child: _ProjectsSection()),
+                        ),
+                        KeyedSubtree(
+                          key: _keys[5],
+                          child: const _Page(child: _ContactSection()),
+                        ),
+                        _Page(child: _FooterSection(onTop: () => _goTo(0))),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
         ],
@@ -574,93 +700,166 @@ class _PortfolioPageState extends State<PortfolioPage> {
     );
   }
 
+  // ---------- Header ----------
+  // Layar lebar : stiker logo di kiri, menu langsung di kanan.
+  // Layar sempit: stiker logo di kiri, tombol hamburger di kanan.
   Widget _buildHeader() {
     return ValueListenableBuilder<bool>(
       valueListenable: _headerScrolled,
       builder: (context, scrolled, _) {
+        final wide = isWide(context);
         return AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           decoration: BoxDecoration(
-            color: scrolled ? const Color(0xEB060A13) : Colors.transparent,
+            color: scrolled ? paper : Colors.transparent,
             border: Border(
               bottom: BorderSide(
-                color: scrolled ? borderColor : Colors.transparent,
+                color: scrolled ? ink : Colors.transparent,
+                width: 2,
               ),
             ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const _Logo(),
-              _HamburgerButton(
-                onTap: () => _scaffoldKey.currentState?.openEndDrawer(),
+          child: _Page(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: pagePad(context),
+                vertical: wide ? 12 : 10,
               ),
-            ],
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const _Logo(),
+                  if (wide)
+                    _buildDesktopNav()
+                  else
+                    _HamburgerButton(
+                      onTap: () => _scaffoldKey.currentState?.openEndDrawer(),
+                    ),
+                ],
+              ),
+            ),
           ),
         );
       },
     );
   }
 
+  Widget _buildDesktopNav() {
+    return ValueListenableBuilder<int>(
+      valueListenable: _activeNav,
+      builder: (context, active, _) {
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            for (int i = 0; i < _sections.length; i++)
+              _NavLink(
+                label: _sections[i],
+                active: i == active,
+                onTap: () => _goTo(i),
+              ),
+          ],
+        );
+      },
+    );
+  }
+
+  // ---------- Drawer (menu HP) ----------
   Widget _buildDrawer() {
     return Drawer(
-      backgroundColor: bgTerminal,
+      backgroundColor: paper,
+      width: 300,
       shape: const RoundedRectangleBorder(),
-      child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(24, 20, 24, 12),
-              child: Text(
-                kTerminalUser,
-                style: mono(size: 12, color: textMuted),
+      child: Container(
+        decoration: const BoxDecoration(
+          border: Border(left: BorderSide(color: ink, width: 3)),
+        ),
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(24, 22, 16, 14),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        kHandle,
+                        overflow: TextOverflow.ellipsis,
+                        style: mono(size: 13, weight: FontWeight.w700),
+                      ),
+                    ),
+                    _Lift(
+                      width: 40,
+                      height: 40,
+                      fill: sun,
+                      radius: 10,
+                      shadow: 3,
+                      onTap: () => _scaffoldKey.currentState?.closeEndDrawer(),
+                      child: const Center(
+                        child: Icon(Icons.close_rounded, size: 22, color: ink),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const Divider(color: borderColor, height: 1),
-            const SizedBox(height: 8),
-            ValueListenableBuilder<int>(
-              valueListenable: _activeNav,
-              builder: (context, active, _) {
-                return Column(
-                  children: List.generate(_sections.length, (i) {
-                    final isActive = i == active;
-                    return InkWell(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                        _goTo(i);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 24,
-                          vertical: 14,
-                        ),
-                        child: Row(
-                          children: [
-                            Text(
-                              isActive ? '> ' : '  ',
-                              style: mono(color: cyan, weight: FontWeight.w700),
-                            ),
-                            Text(
-                              _sections[i],
-                              style: mono(
-                                size: 15,
-                                color: isActive ? cyan : textPrimary,
-                                weight: isActive
-                                    ? FontWeight.w700
-                                    : FontWeight.w500,
+              Container(height: 3, color: ink),
+              Expanded(
+                child: ValueListenableBuilder<int>(
+                  valueListenable: _activeNav,
+                  builder: (context, active, _) {
+                    return ListView(
+                      padding: const EdgeInsets.only(top: 8),
+                      children: [
+                        for (int i = 0; i < _sections.length; i++)
+                          Material(
+                            color: i == active ? sun : Colors.transparent,
+                            child: InkWell(
+                              onTap: () {
+                                _scaffoldKey.currentState?.closeEndDrawer();
+                                _goTo(i);
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 24,
+                                  vertical: 16,
+                                ),
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 40,
+                                      child: Text(
+                                        '0${i + 1}',
+                                        style: mono(
+                                          size: 12.5,
+                                          color: i == active ? ink : textMuted,
+                                          weight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        _sections[i],
+                                        style: heading(size: 26),
+                                      ),
+                                    ),
+                                    if (i == active)
+                                      const Icon(
+                                        Icons.arrow_back_rounded,
+                                        size: 20,
+                                        color: ink,
+                                      ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ],
-                        ),
-                      ),
+                          ),
+                      ],
                     );
-                  }),
-                );
-              },
-            ),
-          ],
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -677,202 +876,221 @@ class _HeroSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final nameStyle = heading(size: 46, spacing: -1.5, height: 1.1);
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 32, 20, 24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text.rich(
-            TextSpan(
-              children: [
-                TextSpan(
-                  text: '\$ ',
-                  style: mono(size: 15, color: cyan, weight: FontWeight.w700),
+    final wide = isWide(context);
+
+    // Blok teks: sapaan, nama raksasa, profesi, kutipan, tombol, sosmed.
+    final intro = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+          decoration: brutal(fill: mint, radius: 30, shadow: 3),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 9,
+                height: 9,
+                decoration: const BoxDecoration(
+                  color: tomato,
+                  shape: BoxShape.circle,
                 ),
-                TextSpan(
-                  text: 'whoami',
-                  style: mono(size: 15, color: textMuted),
+              ),
+              const SizedBox(width: 9),
+              Text(
+                'Halo, perkenalkan',
+                style: mono(size: 12, weight: FontWeight.w700),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: wide ? 26 : 20),
+        LayoutBuilder(
+          builder: (context, c) {
+            List<String> split(String s) =>
+                s.toUpperCase().split(' ').where((w) => w.isNotEmpty).toList();
+            final firstWords = split(kNameFirst);
+            final lastWords = split(kNameLast);
+            final longest = [...firstWords, ...lastWords]
+                .fold<int>(1, (m, w) => math.max(m, w.length));
+            final avail = c.maxWidth - (wide ? 56 : 40);
+            final size = (avail / (longest * 0.8))
+                .clamp(34.0, wide ? 104.0 : 64.0)
+                .toDouble();
+            final style = heading(size: size, spacing: -1.5, height: 1.0);
+            Widget line(String t) => FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: Alignment.centerLeft,
+                  child: Text(t, style: style),
+                );
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                for (final w in firstWords) line(w),
+                const SizedBox(height: 6),
+                Transform.rotate(
+                  angle: -0.025,
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: wide ? 24 : 14,
+                      vertical: wide ? 8 : 4,
+                    ),
+                    decoration:
+                        brutal(fill: tomato, radius: 12, shadow: wide ? 8 : 5),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [for (final w in lastWords) line(w)],
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+        SizedBox(height: wide ? 28 : 22),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
+          decoration: BoxDecoration(
+            color: ink,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.star_rounded, size: 18, color: sun),
+              const SizedBox(width: 10),
+              Flexible(
+                child: Text(
+                  kRole,
+                  style: mono(
+                    size: wide ? 15 : 13.5,
+                    color: paper,
+                    weight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 24),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 560),
+          child: Container(
+            padding: const EdgeInsets.fromLTRB(18, 14, 18, 16),
+            decoration: brutal(fill: cardBg, radius: 14, shadow: 5),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('“', style: heading(size: 52, color: tomato, height: 0.95)),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 6),
+                    child: Text(
+                      kQuote,
+                      style: body(
+                        size: wide ? 17 : 15.5,
+                        weight: FontWeight.w500,
+                        height: 1.55,
+                      ).copyWith(fontStyle: FontStyle.italic),
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 14),
-          Wrap(
-            spacing: 12,
-            runSpacing: 4,
-            children: [
-              Text(kNameFirst, style: nameStyle),
-              _GradientText(kNameLast, nameStyle),
-            ],
-          ),
-          const SizedBox(height: 14),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '>_ ',
-                style: mono(size: 16, color: purple, weight: FontWeight.w700),
+        ),
+        const SizedBox(height: 28),
+        Wrap(
+          spacing: 16,
+          runSpacing: 16,
+          children: [
+            _PrimaryButton(label: kPrimaryButton, onTap: onPrimary),
+            _SecondaryButton(label: kSecondaryButton, onTap: onSecondary),
+          ],
+        ),
+        const SizedBox(height: 26),
+        Wrap(
+          spacing: 14,
+          runSpacing: 14,
+          children: [
+            for (int i = 0; i < kSocials.length; i++)
+              _SocialIcon(
+                social: kSocials[i],
+                fill: kPastels[i % kPastels.length],
               ),
-              Expanded(
-                child: _TypingText(
-                  text: kRole,
-                  style: mono(size: 16, color: cyan),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 22),
-          Container(
-            padding: const EdgeInsets.only(left: 14),
-            decoration: const BoxDecoration(
-              border: Border(left: BorderSide(color: purple, width: 3)),
-            ),
-            child: Text(
-              '"$kQuote"',
-              style: heading(
-                size: 15,
-                color: textMuted,
-                weight: FontWeight.w400,
-                height: 1.6,
-              ).copyWith(fontStyle: FontStyle.italic),
-            ),
-          ),
-          const SizedBox(height: 26),
-          Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            children: [
-              _GradientButton(label: kPrimaryButton, onTap: onPrimary),
-              _OutlineButton(label: kSecondaryButton, onTap: onSecondary),
-            ],
-          ),
-          const SizedBox(height: 22),
-          Wrap(
-            spacing: 10,
-            runSpacing: 10,
-            children: [for (final s in kSocials) _SocialIcon(social: s)],
-          ),
-          const SizedBox(height: 28),
-          const _TerminalCard(),
-          const SizedBox(height: 32),
-          const Center(child: _IronPhoto()),
-        ],
-      ),
+          ],
+        ),
+      ],
     );
-  }
-}
 
-class _TypingText extends StatefulWidget {
-  final String text;
-  final TextStyle style;
-  const _TypingText({required this.text, required this.style});
+    final pad = EdgeInsets.fromLTRB(
+      pagePad(context),
+      wide ? 56 : 28,
+      pagePad(context),
+      wide ? 72 : 36,
+    );
 
-  @override
-  State<_TypingText> createState() => _TypingTextState();
-}
+    // HP: ditumpuk ke bawah.
+    if (!wide) {
+      return Padding(
+        padding: pad,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            intro,
+            const SizedBox(height: 44),
+            const Center(child: _PhotoStage()),
+            const SizedBox(height: 44),
+            const _ProfileCard(),
+          ],
+        ),
+      );
+    }
 
-class _TypingTextState extends State<_TypingText> {
-  int _count = 0;
-  bool _cursorOn = true;
-  Timer? _typeTimer;
-  Timer? _blinkTimer;
-
-  @override
-  void initState() {
-    super.initState();
-    _typeTimer = Timer.periodic(const Duration(milliseconds: 70), (t) {
-      if (!mounted || _count >= widget.text.length) {
-        t.cancel();
-        return;
-      }
-      setState(() => _count++);
-    });
-    _blinkTimer = Timer.periodic(const Duration(milliseconds: 530), (_) {
-      if (mounted) setState(() => _cursorOn = !_cursorOn);
-    });
-  }
-
-  @override
-  void dispose() {
-    _typeTimer?.cancel();
-    _blinkTimer?.cancel();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Text.rich(
-      TextSpan(
-        style: widget.style,
+    // Web: teks + kartu profil di kiri, foto di kanan.
+    return Padding(
+      padding: pad,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TextSpan(text: widget.text.substring(0, _count)),
-          TextSpan(
-            text: '▌',
-            style: TextStyle(color: _cursorOn ? cyan : Colors.transparent),
+          Expanded(
+            flex: 6,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                intro,
+                const SizedBox(height: 40),
+                const _ProfileCard(),
+              ],
+            ),
           ),
+          const SizedBox(width: 56),
+          const Expanded(flex: 4, child: Center(child: _PhotoStage())),
         ],
       ),
     );
   }
 }
 
-class _BlinkingCursor extends StatefulWidget {
-  const _BlinkingCursor();
-
-  @override
-  State<_BlinkingCursor> createState() => _BlinkingCursorState();
-}
-
-class _BlinkingCursorState extends State<_BlinkingCursor> {
-  bool _on = true;
-  Timer? _timer;
-
-  @override
-  void initState() {
-    super.initState();
-    _timer = Timer.periodic(const Duration(milliseconds: 530), (_) {
-      if (mounted) setState(() => _on = !_on);
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      '▌',
-      style: mono(size: 13, color: _on ? cyan : Colors.transparent),
-    );
-  }
-}
-
+// ---------- Ikon sosmed (kotak pastel) ----------
 class _SocialIcon extends StatelessWidget {
   final Social social;
-  const _SocialIcon({required this.social});
+  final Color fill;
+  const _SocialIcon({required this.social, required this.fill});
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: Ink(
-        width: 44,
-        height: 44,
-        decoration: BoxDecoration(
-          color: const Color(0x0AFFFFFF),
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: borderColor),
-        ),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(10),
-          onTap: () => openLink(context, social.url),
-          child: Center(child: _SocialGlyph(social: social, size: 20)),
-        ),
-      ),
+    return _Lift(
+      width: 48,
+      height: 48,
+      fill: fill,
+      radius: 12,
+      shadow: 4,
+      onTap: () => openLink(context, social.url),
+      child: Center(child: _SocialGlyph(social: social, size: 22)),
     );
   }
 }
@@ -885,144 +1103,142 @@ class _SocialGlyph extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (social.icon != null) {
-      return Icon(social.icon, size: size, color: textMuted);
+      return Icon(social.icon, size: size, color: ink);
     }
     return Text(
       social.glyph ?? '',
-      style: mono(size: size - 3, color: textMuted, weight: FontWeight.w800),
+      style: mono(size: size - 4, weight: FontWeight.w700),
     );
   }
 }
 
-class _TerminalCard extends StatelessWidget {
-  const _TerminalCard();
+// ---------- Kartu profil (isi dari kProfile) ----------
+class _ProfileCard extends StatelessWidget {
+  const _ProfileCard();
 
-  Widget _dot(Color c) => Container(
-        width: 11,
-        height: 11,
-        margin: const EdgeInsets.only(right: 7),
-        decoration: BoxDecoration(color: c, shape: BoxShape.circle),
-      );
-
-  Widget _cmd(String c) => Text.rich(
-        TextSpan(
-          children: [
-            TextSpan(
-              text: '\$ ',
-              style: mono(size: 13, color: cyan, weight: FontWeight.w700),
+  Widget _row(String label, Object value, {required bool last}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 11),
+      decoration: BoxDecoration(
+        border: last
+            ? null
+            : const Border(
+                bottom: BorderSide(color: Color(0x3315130F), width: 1.4),
+              ),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 96,
+            child: Text(
+              label.toUpperCase(),
+              style: mono(
+                size: 10.5,
+                color: textMuted,
+                weight: FontWeight.w700,
+                spacing: 0.8,
+              ),
             ),
-            TextSpan(
-              text: c,
-              style: mono(size: 13, color: cyan, weight: FontWeight.w600),
-            ),
-          ],
-        ),
-      );
-
-  List<InlineSpan> _jsonSpans() {
-    final base = mono(size: 12.5, color: textMuted, height: 1.7);
-    final keyStyle = base.copyWith(color: purple);
-    final strStyle = base.copyWith(color: green);
-    final spans = <InlineSpan>[TextSpan(text: '{\n', style: base)];
-    final entries = kProfile.entries.toList();
-    for (int i = 0; i < entries.length; i++) {
-      final e = entries[i];
-      final comma = i < entries.length - 1 ? ',\n' : '\n';
-      spans.add(TextSpan(text: '  "${e.key}"', style: keyStyle));
-      spans.add(TextSpan(text: ': ', style: base));
-      final v = e.value;
-      if (v is List) {
-        spans.add(TextSpan(text: '[', style: base));
-        for (int j = 0; j < v.length; j++) {
-          spans.add(TextSpan(text: '"${v[j]}"', style: strStyle));
-          if (j < v.length - 1) spans.add(TextSpan(text: ', ', style: base));
-        }
-        spans.add(TextSpan(text: ']$comma', style: base));
-      } else {
-        spans.add(TextSpan(text: '"$v"', style: strStyle));
-        spans.add(TextSpan(text: comma, style: base));
-      }
-    }
-    spans.add(TextSpan(text: '}', style: base));
-    return spans;
+          ),
+          Expanded(
+            child: value is List
+                ? Wrap(
+                    spacing: 6,
+                    runSpacing: 6,
+                    children: [for (final v in value) _Chip('$v', accent: true)],
+                  )
+                : Text(
+                    '$value',
+                    style: body(size: 14.5, weight: FontWeight.w600, height: 1.4),
+                  ),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final entries = kProfile.entries.toList();
     return Container(
       clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-        color: bgTerminal,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: borderColor),
-        boxShadow: [BoxShadow(color: cyanA(0.06), blurRadius: 30)],
-      ),
+      decoration: brutal(fill: cardBg, radius: 18, shadow: 7),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            color: bgTerminalBar,
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 11),
+            decoration: const BoxDecoration(
+              color: tomato,
+              border: Border(bottom: BorderSide(color: ink, width: 2)),
+            ),
             child: Row(
               children: [
-                _dot(const Color(0xFFFF5F57)),
-                _dot(const Color(0xFFFEBC2E)),
-                _dot(const Color(0xFF28C840)),
+                Text(
+                  'KARTU PROFIL',
+                  style: mono(size: 12, weight: FontWeight.w700, spacing: 1.5),
+                ),
                 const Spacer(),
-                Text(kTerminalUser, style: mono(size: 11.5, color: textMuted)),
+                Flexible(
+                  child: Text(
+                    kHandle,
+                    overflow: TextOverflow.ellipsis,
+                    style: mono(size: 12, weight: FontWeight.w700),
+                  ),
+                ),
               ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(18),
+            padding: const EdgeInsets.fromLTRB(18, 8, 18, 6),
+            child: Column(
+              children: [
+                for (int i = 0; i < entries.length; i++)
+                  _row(
+                    entries[i].key,
+                    entries[i].value,
+                    last: i == entries.length - 1,
+                  ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.fromLTRB(18, 14, 18, 16),
+            decoration: const BoxDecoration(
+              color: paperDark,
+              border: Border(top: BorderSide(color: ink, width: 2)),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _cmd('cat profil.json'),
-                const SizedBox(height: 4),
-                Text.rich(TextSpan(children: _jsonSpans())),
-                const SizedBox(height: 6),
-                _cmd('uptime --karier'),
-                const SizedBox(height: 4),
                 Text(
-                  kUptime,
-                  style: mono(size: 12.5, color: textMuted, height: 1.6),
+                  kExperienceLine,
+                  style: mono(size: 12, weight: FontWeight.w700, height: 1.5),
                 ),
-                const SizedBox(height: 6),
-                _cmd('sudo kerjakan --dengan-sepenuh-hati'),
-                const SizedBox(height: 4),
-                Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: '[OK] ',
-                        style: mono(
-                          size: 12.5,
-                          color: green,
-                          weight: FontWeight.w700,
-                          height: 1.6,
-                        ),
-                      ),
-                      TextSpan(
-                        text: kTerminalOk,
-                        style: mono(size: 12.5, color: textMuted, height: 1.6),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Row(
-                  children: [
-                    Text(
-                      '\$ ',
+                const SizedBox(height: 12),
+                Transform.rotate(
+                  angle: -0.05,
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: tomato, width: 2.2),
+                    ),
+                    child: Text(
+                      kStatusLine.toUpperCase(),
                       style: mono(
-                        size: 13,
-                        color: cyan,
+                        size: 11,
+                        color: tomato,
                         weight: FontWeight.w700,
+                        spacing: 0.6,
                       ),
                     ),
-                    const _BlinkingCursor(),
-                  ],
+                  ),
                 ),
               ],
             ),
@@ -1033,7 +1249,55 @@ class _TerminalCard extends StatelessWidget {
   }
 }
 
-// ---------- Foto dengan Efek Iron Man ----------
+// ---------- Foto dengan efek Iron Man (ketuk untuk nyala/mati) ----------
+// Agar foto asli tampil:
+//  1. buat folder assets/ di root proyek, simpan fotomu sebagai foto.jpg
+//  2. di pubspec.yaml (bagian flutter:) tambahkan:
+//       assets:
+//         - assets/foto.jpg
+//  Jangan daftarkan dulu kalau filenya belum ada (build akan gagal).
+
+// Panggung foto: foto + bulatan dekoratif di belakangnya.
+class _PhotoStage extends StatelessWidget {
+  const _PhotoStage();
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      clipBehavior: Clip.none,
+      children: [
+        Positioned(right: -18, top: 6, child: const _Blob(size: 110, color: sun)),
+        Positioned(
+          left: -14,
+          bottom: 70,
+          child: const _Blob(size: 70, color: lilac),
+        ),
+        const _IronPhoto(),
+      ],
+    );
+  }
+}
+
+class _Blob extends StatelessWidget {
+  final double size;
+  final Color color;
+  const _Blob({required this.size, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        color: color,
+        shape: BoxShape.circle,
+        border: Border.all(color: ink, width: 2.5),
+      ),
+    );
+  }
+}
+
 class _IronPhoto extends StatefulWidget {
   const _IronPhoto();
 
@@ -1050,32 +1314,20 @@ class _IronPhotoState extends State<_IronPhoto> {
     0, 0, 1.05, 0, -5,
     0, 0, 0, 1, 0,
   ];
-  static const _matOff = <double>[
-    0.65, 0.20, 0.15, 0, 0,
-    0.20, 0.65, 0.15, 0, 0,
-    0.20, 0.20, 0.60, 0, 0,
-    0, 0, 0, 1, 0,
-  ];
 
   Widget _placeholder() {
     return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF101830), Color(0xFF0A0F1C)],
-        ),
-      ),
+      color: paperDark,
       child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.person, size: 90, color: Color(0x3DFFFFFF)),
+            const Icon(Icons.person_rounded, size: 96, color: ink),
             const SizedBox(height: 8),
             Text(
               'taruh fotomu di\nassets/foto.jpg',
               textAlign: TextAlign.center,
-              style: mono(size: 11.5, color: textMuted),
+              style: mono(size: 11.5, weight: FontWeight.w700),
             ),
           ],
         ),
@@ -1086,126 +1338,158 @@ class _IronPhotoState extends State<_IronPhoto> {
   @override
   Widget build(BuildContext context) {
     final on = _on;
+    final wide = isWide(context);
+
+    Widget image = Image.asset(
+      kPhotoAsset,
+      fit: BoxFit.cover,
+      errorBuilder: (_, __, ___) => _placeholder(),
+    );
+    if (on) {
+      image = ColorFiltered(
+        colorFilter: const ColorFilter.matrix(_matOn),
+        child: image,
+      );
+    }
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         GestureDetector(
           onTap: () => setState(() => _on = !_on),
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 550),
-            curve: Curves.easeOutCubic,
-            width: 280,
-            height: 340,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(24),
-              color: bgTerminal,
-              border: Border.all(color: on ? goldA(0.6) : cyanA(0.25)),
-              boxShadow: on
-                  ? [
-                      BoxShadow(color: redA(0.35), blurRadius: 60),
-                      BoxShadow(color: goldA(0.18), blurRadius: 100),
-                    ]
-                  : [BoxShadow(color: cyanA(0.08), blurRadius: 40)],
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(24),
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  AnimatedScale(
-                    duration: const Duration(milliseconds: 800),
-                    curve: Curves.easeOutCubic,
-                    scale: on ? 1.08 : 1.02,
-                    child: ColorFiltered(
-                      colorFilter: ColorFilter.matrix(on ? _matOn : _matOff),
-                      child: Image.asset(
-                        kPhotoAsset,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) =>
-                            _placeholder(),
+          child: MouseRegion(
+            cursor: SystemMouseCursors.click,
+            // Foto sedikit miring seperti stiker; lurus saat mode menyala.
+            child: AnimatedRotation(
+              turns: on ? 0 : -0.0055,
+              duration: const Duration(milliseconds: 450),
+              curve: Curves.easeOutBack,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 550),
+                curve: Curves.easeOutCubic,
+                width: wide ? 320 : 280,
+                height: wide ? 400 : 340,
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: on ? ironGold : sky,
+                  borderRadius: BorderRadius.circular(24),
+                  border: Border.all(color: ink, width: 3),
+                  boxShadow: [
+                    const BoxShadow(color: ink, offset: Offset(9, 9)),
+                    if (on)
+                      BoxShadow(
+                        color: redA(0.45),
+                        blurRadius: 60,
+                        spreadRadius: 4,
                       ),
-                    ),
+                    if (on) BoxShadow(color: goldA(0.35), blurRadius: 110),
+                  ],
+                ),
+                child: Container(
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: ink, width: 2.5),
                   ),
-                  AnimatedOpacity(
-                    duration: const Duration(milliseconds: 550),
-                    opacity: on ? 1 : 0,
-                    child: IgnorePointer(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          gradient: RadialGradient(
-                            center: const Alignment(0, 0.1),
-                            radius: 0.6,
-                            colors: [redA(0.35), Colors.transparent],
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      AnimatedScale(
+                        duration: const Duration(milliseconds: 800),
+                        curve: Curves.easeOutCubic,
+                        scale: on ? 1.08 : 1.02,
+                        child: image,
+                      ),
+                      AnimatedOpacity(
+                        duration: const Duration(milliseconds: 550),
+                        opacity: on ? 1 : 0,
+                        child: IgnorePointer(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: RadialGradient(
+                                center: const Alignment(0, 0.1),
+                                radius: 0.6,
+                                colors: [redA(0.35), Colors.transparent],
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                  AnimatedOpacity(
-                    duration: const Duration(milliseconds: 550),
-                    opacity: on ? 1 : 0,
-                    child: IgnorePointer(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              goldA(0.10),
-                              Colors.transparent,
-                              Colors.transparent,
-                              redA(0.18),
-                            ],
-                            stops: const [0.0, 0.4, 0.55, 1.0],
+                      AnimatedOpacity(
+                        duration: const Duration(milliseconds: 550),
+                        opacity: on ? 1 : 0,
+                        child: IgnorePointer(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  goldA(0.10),
+                                  Colors.transparent,
+                                  Colors.transparent,
+                                  redA(0.18),
+                                ],
+                                stops: const [0.0, 0.4, 0.55, 1.0],
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                  if (on) const _ScanLine(),
-                  AnimatedOpacity(
-                    duration: const Duration(milliseconds: 500),
-                    opacity: on ? 1 : 0,
-                    child: Align(
-                      alignment: const Alignment(0, 0.16),
-                      child: AnimatedScale(
-                        duration: const Duration(milliseconds: 600),
-                        curve: Curves.easeOutBack,
-                        scale: on ? 1.0 : 0.4,
-                        child: const _ArcReactor(),
+                      if (on) const _ScanLine(),
+                      AnimatedOpacity(
+                        duration: const Duration(milliseconds: 500),
+                        opacity: on ? 1 : 0,
+                        child: Align(
+                          alignment: const Alignment(0, 0.16),
+                          child: AnimatedScale(
+                            duration: const Duration(milliseconds: 600),
+                            curve: Curves.easeOutBack,
+                            scale: on ? 1.0 : 0.4,
+                            child: const _ArcReactor(),
+                          ),
+                        ),
                       ),
-                    ),
+                      Positioned(
+                        top: 12,
+                        left: 12,
+                        child: _HudCorner(isOn: on, top: true, left: true),
+                      ),
+                      Positioned(
+                        top: 12,
+                        right: 12,
+                        child: _HudCorner(isOn: on, top: true, left: false),
+                      ),
+                      Positioned(
+                        bottom: 12,
+                        left: 12,
+                        child: _HudCorner(isOn: on, top: false, left: true),
+                      ),
+                      Positioned(
+                        bottom: 12,
+                        right: 12,
+                        child: _HudCorner(isOn: on, top: false, left: false),
+                      ),
+                    ],
                   ),
-                  Positioned(
-                    top: 14,
-                    left: 14,
-                    child: _HudCorner(isOn: on, top: true, left: true),
-                  ),
-                  Positioned(
-                    top: 14,
-                    right: 14,
-                    child: _HudCorner(isOn: on, top: true, left: false),
-                  ),
-                  Positioned(
-                    bottom: 14,
-                    left: 14,
-                    child: _HudCorner(isOn: on, top: false, left: true),
-                  ),
-                  Positioned(
-                    bottom: 14,
-                    right: 14,
-                    child: _HudCorner(isOn: on, top: false, left: false),
-                  ),
-                ],
+                ),
               ),
             ),
           ),
         ),
-        const SizedBox(height: 14),
-        AnimatedDefaultTextStyle(
+        const SizedBox(height: 26),
+        AnimatedContainer(
           duration: const Duration(milliseconds: 300),
-          style: mono(size: 12, color: on ? gold : textMuted, spacing: 0.6),
-          child: Text(on ? '> MODE IRON MAN: ON' : '> ketuk fotoku'),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          decoration: brutal(
+            fill: on ? ironGold : cardBg,
+            radius: 30,
+            shadow: 3,
+          ),
+          child: Text(
+            on ? '⚡ MODE IRON MAN: ON' : 'Ketuk fotoku',
+            style: mono(size: 12, weight: FontWeight.w700, spacing: 0.6),
+          ),
         ),
       ],
     );
@@ -1245,8 +1529,7 @@ class _ScanLineState extends State<_ScanLine>
       builder: (context, _) {
         final t = _c.value;
         final top = -0.08 + 1.16 * t;
-        final opacity =
-            t < 0.12 ? t / 0.12 : (t > 0.88 ? (1 - t) / 0.12 : 1.0);
+        final opacity = t < 0.12 ? t / 0.12 : (t > 0.88 ? (1 - t) / 0.12 : 1.0);
         return Align(
           alignment: Alignment(0, 2 * top - 1),
           child: Opacity(
@@ -1257,9 +1540,9 @@ class _ScanLineState extends State<_ScanLine>
                 gradient: const LinearGradient(
                   colors: [
                     Colors.transparent,
-                    gold,
+                    ironGold,
                     Colors.white,
-                    gold,
+                    ironGold,
                     Colors.transparent,
                   ],
                 ),
@@ -1319,7 +1602,7 @@ class _ArcReactorState extends State<_ArcReactor>
                 height: 74 + 32 * t,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: cyanA(0.5 * (1 - t))),
+                  border: Border.all(color: arcA(0.5 * (1 - t))),
                 ),
               );
             },
@@ -1339,23 +1622,15 @@ class _ArcReactorState extends State<_ArcReactor>
                       colors: [
                         Colors.white,
                         Color(0xFFB8F4FF),
-                        cyan,
+                        arcCyan,
                         Color(0x4000E5FF),
                         Colors.transparent,
                       ],
                       stops: [0.0, 0.18, 0.40, 0.62, 0.72],
                     ),
                     boxShadow: [
-                      BoxShadow(
-                        color: cyanA(0.8),
-                        blurRadius: 24,
-                        spreadRadius: 6,
-                      ),
-                      BoxShadow(
-                        color: cyanA(0.3),
-                        blurRadius: 55,
-                        spreadRadius: 18,
-                      ),
+                      BoxShadow(color: arcA(0.8), blurRadius: 24, spreadRadius: 6),
+                      BoxShadow(color: arcA(0.3), blurRadius: 55, spreadRadius: 18),
                     ],
                   ),
                 ),
@@ -1375,7 +1650,7 @@ class _HudCorner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const side = BorderSide(color: gold, width: 2);
+    const side = BorderSide(color: ironGold, width: 2.5);
     return AnimatedOpacity(
       duration: const Duration(milliseconds: 500),
       opacity: isOn ? 1 : 0,
@@ -1403,83 +1678,87 @@ class _HudCorner extends StatelessWidget {
 }
 
 // ============================================================
-// TENTANG (01)
+// TENTANG (// 01)
 // ============================================================
 class _AboutSection extends StatelessWidget {
   const _AboutSection();
 
   @override
   Widget build(BuildContext context) {
-    final base = heading(
-      size: 15,
-      color: textMuted,
-      weight: FontWeight.w400,
-      height: 1.75,
+    final wide = isWide(context);
+    final base = body(size: wide ? 17 : 16, color: textMuted, height: 1.7);
+    // Kata tebal diberi stabilo kuning.
+    final bold = base.copyWith(
+      color: ink,
+      fontWeight: FontWeight.w800,
+      backgroundColor: const Color(0x66FFC93C),
     );
-    final bold = base.copyWith(color: textPrimary, fontWeight: FontWeight.w700);
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+
+    final text = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (int i = 0; i < kAboutParagraphs.length; i++)
+          _Reveal(
+            delay: Duration(milliseconds: 80 * i),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Text.rich(
+                TextSpan(children: _markup(kAboutParagraphs[i], base, bold)),
+              ),
+            ),
+          ),
+        const SizedBox(height: 6),
+        Wrap(
+          spacing: 10,
+          runSpacing: 10,
+          children: [for (final s in kAboutInfo) _Chip(s)],
+        ),
+      ],
+    );
+
+    final skills = Container(
+      padding: const EdgeInsets.all(20),
+      decoration: brutal(fill: cardBg, radius: 18, shadow: 6),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const _SectionTitle(number: '01', title: 'Tentang Saya'),
-          const SizedBox(height: 24),
-          for (int i = 0; i < kAboutParagraphs.length; i++)
+          for (int i = 0; i < kSkills.length; i++)
             _Reveal(
-              delay: Duration(milliseconds: 80 * i),
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 14),
-                child: Text.rich(
-                  TextSpan(children: _markup(kAboutParagraphs[i], base, bold)),
+                padding: EdgeInsets.only(
+                  bottom: i == kSkills.length - 1 ? 0 : 22,
                 ),
-              ),
-            ),
-          const SizedBox(height: 6),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: [for (final s in kAboutInfo) _Chip(s)],
-          ),
-          const SizedBox(height: 28),
-          LayoutBuilder(
-            builder: (context, c) {
-              final w = math.max(0.0, (c.maxWidth - 12) / 2);
-              return Wrap(
-                spacing: 12,
-                runSpacing: 12,
-                children: [
-                  for (final s in kStats)
-                    SizedBox(
-                      width: w,
-                      child: _StatCard(stat: s),
-                    ),
-                ],
-              );
-            },
-          ),
-          const SizedBox(height: 32),
-          for (final g in kSkills)
-            _Reveal(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      '// ${g.title}',
-                      style: mono(
-                        size: 12.5,
-                        color: cyan,
-                        weight: FontWeight.w600,
-                        spacing: 0.5,
-                      ),
+                    Row(
+                      children: [
+                        Container(
+                          width: 11,
+                          height: 11,
+                          decoration: BoxDecoration(
+                            color: tomato,
+                            border: Border.all(color: ink, width: 2),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Text(
+                          kSkills[i].title.toUpperCase(),
+                          style: mono(
+                            size: 12,
+                            weight: FontWeight.w700,
+                            spacing: 1.2,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 12),
                     Wrap(
                       spacing: 8,
                       runSpacing: 8,
                       children: [
-                        for (final s in g.items) _Chip(s, accent: true),
+                        for (final s in kSkills[i].items)
+                          _Chip(s, accent: true),
                       ],
                     ),
                   ],
@@ -1489,34 +1768,87 @@ class _AboutSection extends StatelessWidget {
         ],
       ),
     );
+
+    final stats = LayoutBuilder(
+      builder: (context, c) {
+        final cols = c.maxWidth >= 640 ? 4 : 2;
+        const gap = 18.0;
+        final w = ((c.maxWidth - gap * (cols - 1)) / cols).floorToDouble();
+        return Wrap(
+          spacing: gap,
+          runSpacing: gap,
+          children: [
+            for (int i = 0; i < kStats.length; i++)
+              SizedBox(
+                width: w,
+                child: _StatCard(
+                  stat: kStats[i],
+                  fill: kPastels[i % kPastels.length],
+                ),
+              ),
+          ],
+        );
+      },
+    );
+
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: pagePad(context),
+        vertical: sectionPad(context),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const _SectionTitle(number: '01', title: 'Tentang Saya'),
+          SizedBox(height: wide ? 36 : 28),
+          if (wide) ...[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(flex: 6, child: text),
+                const SizedBox(width: 56),
+                Expanded(flex: 5, child: skills),
+              ],
+            ),
+            const SizedBox(height: 40),
+            stats,
+          ] else ...[
+            text,
+            const SizedBox(height: 28),
+            stats,
+            const SizedBox(height: 36),
+            skills,
+          ],
+        ],
+      ),
+    );
   }
 }
 
 class _StatCard extends StatelessWidget {
   final Stat stat;
-  const _StatCard({required this.stat});
+  final Color fill;
+  const _StatCard({required this.stat, required this.fill});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: const Color(0x0AFFFFFF),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: borderColor),
-      ),
+    return _Lift(
+      fill: fill,
+      radius: 16,
+      shadow: 5,
+      padding: const EdgeInsets.all(18),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _CountUp(
             value: stat.value,
             suffix: stat.suffix,
-            style: heading(size: 34, spacing: -1),
+            style: heading(size: 44, spacing: -1),
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 6),
           Text(
             stat.label,
-            style: mono(size: 11.5, color: textMuted, height: 1.4),
+            style: mono(size: 11.5, weight: FontWeight.w700, height: 1.35),
           ),
         ],
       ),
@@ -1525,28 +1857,40 @@ class _StatCard extends StatelessWidget {
 }
 
 // ============================================================
-// KARIR (02)
+// KARIR (// 02) — timeline vertikal
 // ============================================================
 class _CareerSection extends StatelessWidget {
   const _CareerSection();
 
   @override
   Widget build(BuildContext context) {
+    final wide = isWide(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+      padding: EdgeInsets.symmetric(
+        horizontal: pagePad(context),
+        vertical: sectionPad(context),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const _SectionTitle(number: '02', title: 'Pendidikan & Karir'),
-          const SizedBox(height: 28),
-          for (int i = 0; i < kCareer.length; i++)
-            _Reveal(
-              child: _CareerTile(
-                item: kCareer[i],
-                first: i == 0,
-                last: i == kCareer.length - 1,
-              ),
+          const _SectionTitle(number: '02', title: 'Karir'),
+          SizedBox(height: wide ? 40 : 30),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 860),
+            child: Column(
+              children: [
+                for (int i = 0; i < kCareer.length; i++)
+                  _Reveal(
+                    child: _CareerTile(
+                      item: kCareer[i],
+                      index: i,
+                      first: i == 0,
+                      last: i == kCareer.length - 1,
+                    ),
+                  ),
+              ],
             ),
+          ),
         ],
       ),
     );
@@ -1555,80 +1899,88 @@ class _CareerSection extends StatelessWidget {
 
 class _CareerTile extends StatelessWidget {
   final CareerItem item;
+  final int index;
   final bool first, last;
   const _CareerTile({
     required this.item,
+    required this.index,
     required this.first,
     required this.last,
   });
 
   @override
   Widget build(BuildContext context) {
+    final accent = kPastels[index % kPastels.length];
     return Stack(
       children: [
+        // garis vertikal tinta
         Positioned(
-          left: 5,
-          width: 2,
-          top: first ? 28 : 0,
+          left: 8,
+          width: 3,
+          top: first ? 30 : 0,
           bottom: last ? null : 0,
-          height: last ? 28 : null,
-          child: ColoredBox(color: cyanA(0.22)),
+          height: last ? 30 : null,
+          child: const ColoredBox(color: ink),
         ),
+        // penanda berlian
         Positioned(
           left: 0,
-          top: 22,
-          child: Container(
-            width: 12,
-            height: 12,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: bg,
-              border: Border.all(color: cyan, width: 2),
-              boxShadow: [BoxShadow(color: cyanA(0.5), blurRadius: 10)],
+          top: 21,
+          child: Transform.rotate(
+            angle: math.pi / 4,
+            child: Container(
+              width: 17,
+              height: 17,
+              decoration: BoxDecoration(
+                color: accent,
+                border: Border.all(color: ink, width: 2.5),
+              ),
             ),
           ),
         ),
+        // kartu
         Padding(
-          padding: EdgeInsets.only(left: 30, bottom: last ? 0 : 18),
+          padding: EdgeInsets.only(left: 40, right: 6, bottom: last ? 8 : 24),
           child: SizedBox(
             width: double.infinity,
-            child: Container(
-              padding: const EdgeInsets.all(18),
-              decoration: BoxDecoration(
-                color: const Color(0x0AFFFFFF),
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: borderColor),
-              ),
+            child: _Lift(
+              fill: cardBg,
+              radius: 16,
+              shadow: 5,
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    item.period,
-                    style: mono(
-                      size: 11.5,
-                      color: cyan,
-                      weight: FontWeight.w600,
-                      spacing: 0.5,
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: accent,
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(color: ink, width: 1.8),
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(item.title, style: heading(size: 18, height: 1.25)),
-                  const SizedBox(height: 4),
-                  Text(
-                    item.org,
-                    style: mono(size: 12.5, color: const Color(0xFFA791FF)),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    item.desc,
-                    style: heading(
-                      size: 14,
-                      color: textMuted,
-                      weight: FontWeight.w400,
-                      height: 1.65,
+                    child: Text(
+                      item.period,
+                      style: mono(size: 11.5, weight: FontWeight.w700),
                     ),
                   ),
                   const SizedBox(height: 12),
+                  Text(item.title, style: heading(size: 20, height: 1.2)),
+                  const SizedBox(height: 6),
+                  Text(
+                    item.org,
+                    style: mono(
+                      size: 12.5,
+                      color: textMuted,
+                      weight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    item.desc,
+                    style: body(size: 14.5, color: textMuted, height: 1.65),
+                  ),
+                  const SizedBox(height: 14),
                   Wrap(
                     spacing: 6,
                     runSpacing: 6,
@@ -1647,39 +1999,37 @@ class _CareerTile extends StatelessWidget {
 }
 
 // ============================================================
-// PRESTASI (03)
+// PRESTASI (// 03)
 // ============================================================
 class _AchievementsSection extends StatelessWidget {
   const _AchievementsSection();
 
   @override
   Widget build(BuildContext context) {
+    final wide = isWide(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+      padding: EdgeInsets.symmetric(
+        horizontal: pagePad(context),
+        vertical: sectionPad(context),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const _SectionTitle(number: '03', title: 'Prestasi'),
-          const SizedBox(height: 28),
-          LayoutBuilder(
-            builder: (context, c) {
-              final cols = c.maxWidth >= 480 ? 2 : 1;
-              final w = math.max(0.0, (c.maxWidth - 12 * (cols - 1)) / cols);
-              return Wrap(
-                spacing: 12,
-                runSpacing: 12,
-                children: [
-                  for (int i = 0; i < kAchievements.length; i++)
-                    SizedBox(
-                      width: w,
-                      child: _Reveal(
-                        delay: Duration(milliseconds: 60 * (i % 2)),
-                        child: _AchievementCard(item: kAchievements[i]),
-                      ),
-                    ),
-                ],
-              );
-            },
+          SizedBox(height: wide ? 40 : 30),
+          _Grid(
+            columns: (w) => w >= 900 ? 3 : (w >= 480 ? 2 : 1),
+            gap: 20,
+            children: [
+              for (int i = 0; i < kAchievements.length; i++)
+                _Reveal(
+                  delay: Duration(milliseconds: 60 * (i % 3)),
+                  child: _AchievementCard(
+                    item: kAchievements[i],
+                    fill: kPastels[i % kPastels.length],
+                  ),
+                ),
+            ],
           ),
         ],
       ),
@@ -1689,51 +2039,40 @@ class _AchievementsSection extends StatelessWidget {
 
 class _AchievementCard extends StatelessWidget {
   final Achievement item;
-  const _AchievementCard({required this.item});
+  final Color fill;
+  const _AchievementCard({required this.item, required this.fill});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        color: const Color(0x0AFFFFFF),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: borderColor),
-      ),
+    return _Lift(
+      fill: fill,
+      radius: 18,
+      shadow: 6,
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 42,
-            height: 42,
+            width: 48,
+            height: 48,
             decoration: BoxDecoration(
-              color: purpleA(0.12),
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: purpleA(0.35)),
+              color: cardBg,
+              shape: BoxShape.circle,
+              border: Border.all(color: ink, width: 2.2),
             ),
-            child: Icon(item.icon, size: 22, color: const Color(0xFFA791FF)),
+            child: Icon(item.icon, size: 24, color: ink),
           ),
-          const SizedBox(height: 14),
+          const SizedBox(height: 16),
           Text(
             item.tag.toUpperCase(),
-            style: mono(
-              size: 10.5,
-              color: cyan,
-              weight: FontWeight.w600,
-              spacing: 1.2,
-            ),
+            style: mono(size: 11, weight: FontWeight.w700, spacing: 1.3),
           ),
           const SizedBox(height: 6),
-          Text(item.title, style: heading(size: 16, height: 1.3)),
-          const SizedBox(height: 8),
+          Text(item.title, style: heading(size: 20, height: 1.2)),
+          const SizedBox(height: 10),
           Text(
             item.desc,
-            style: heading(
-              size: 13,
-              color: textMuted,
-              weight: FontWeight.w400,
-              height: 1.6,
-            ),
+            style: body(size: 14.5, color: const Color(0xFF2B2722), height: 1.6),
           ),
         ],
       ),
@@ -1742,7 +2081,7 @@ class _AchievementCard extends StatelessWidget {
 }
 
 // ============================================================
-// PROYEK (04)
+// PROYEK (// 04) — dengan filter kategori
 // ============================================================
 class _ProjectsSection extends StatefulWidget {
   const _ProjectsSection();
@@ -1756,24 +2095,18 @@ class _ProjectsSectionState extends State<_ProjectsSection> {
 
   Widget _filterChip(String label) {
     final selected = label == _filter;
-    return InkWell(
-      borderRadius: BorderRadius.circular(8),
+    return _Lift(
+      fill: selected ? ink : cardBg,
+      radius: 30,
+      shadow: selected ? 0 : 3,
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 9),
       onTap: () => setState(() => _filter = label),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 180),
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-        decoration: BoxDecoration(
-          color: selected ? cyanA(0.12) : Colors.transparent,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: selected ? cyan : borderColor),
-        ),
-        child: Text(
-          label,
-          style: mono(
-            size: 12.5,
-            color: selected ? cyan : textMuted,
-            weight: FontWeight.w600,
-          ),
+      child: Text(
+        label,
+        style: mono(
+          size: 12.5,
+          color: selected ? paper : ink,
+          weight: FontWeight.w700,
         ),
       ),
     );
@@ -1781,35 +2114,38 @@ class _ProjectsSectionState extends State<_ProjectsSection> {
 
   @override
   Widget build(BuildContext context) {
+    final wide = isWide(context);
     final categories = ['Semua', ...kProjects.map((p) => p.category).toSet()];
     final shown = kProjects
         .where((p) => _filter == 'Semua' || p.category == _filter)
         .toList();
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+      padding: EdgeInsets.symmetric(
+        horizontal: pagePad(context),
+        vertical: sectionPad(context),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const _SectionTitle(number: '04', title: 'Proyek'),
-          const SizedBox(height: 24),
+          SizedBox(height: wide ? 36 : 28),
           Wrap(
-            spacing: 8,
-            runSpacing: 8,
+            spacing: 14,
+            runSpacing: 14,
             children: [for (final c in categories) _filterChip(c)],
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 28),
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 250),
-            child: Column(
+            child: KeyedSubtree(
               key: ValueKey(_filter),
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                for (final p in shown)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 14),
-                    child: _ProjectCard(project: p),
-                  ),
-              ],
+              child: _Grid(
+                columns: (w) => w >= 900 ? 3 : (w >= 560 ? 2 : 1),
+                gap: 20,
+                children: [
+                  for (final p in shown) _ProjectCard(project: p),
+                ],
+              ),
             ),
           ),
         ],
@@ -1824,40 +2160,39 @@ class _ProjectCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: Ink(
-        decoration: BoxDecoration(
-          color: const Color(0x0AFFFFFF),
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: borderColor),
-        ),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(14),
-          onTap: () => openLink(context, project.url),
-          child: Padding(
+    return _Lift(
+      fill: cardBg,
+      radius: 18,
+      shadow: 6,
+      clip: Clip.antiAlias,
+      onTap: () => openLink(context, project.url),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+            decoration: BoxDecoration(
+              color: pastelFor(project.category),
+              border: const Border(bottom: BorderSide(color: ink, width: 2)),
+            ),
+            child: Row(
+              children: [
+                Text(project.year, style: heading(size: 28, spacing: -0.5)),
+                const Spacer(),
+                _Chip(project.category),
+              ],
+            ),
+          ),
+          Padding(
             padding: const EdgeInsets.all(18),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Text(project.year, style: mono(size: 12, color: textMuted)),
-                    const SizedBox(width: 10),
-                    _Chip(project.category),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                Text(project.title, style: heading(size: 18, height: 1.25)),
+                Text(project.title, style: heading(size: 20, height: 1.2)),
                 const SizedBox(height: 8),
                 Text(
                   project.desc,
-                  style: heading(
-                    size: 14,
-                    color: textMuted,
-                    weight: FontWeight.w400,
-                    height: 1.65,
-                  ),
+                  style: body(size: 14.5, color: textMuted, height: 1.6),
                 ),
                 const SizedBox(height: 14),
                 Wrap(
@@ -1867,38 +2202,28 @@ class _ProjectCard extends StatelessWidget {
                     for (final t in project.tags) _Chip(t, accent: true),
                   ],
                 ),
-                const SizedBox(height: 14),
+                const SizedBox(height: 16),
                 Row(
                   children: [
                     Text(
-                      'Buka proyek ',
-                      style: mono(
-                        size: 12.5,
-                        color: cyan,
-                        weight: FontWeight.w600,
-                      ),
+                      'Buka proyek',
+                      style: mono(size: 12.5, weight: FontWeight.w700),
                     ),
-                    Text(
-                      '→',
-                      style: mono(
-                        size: 14,
-                        color: cyan,
-                        weight: FontWeight.w700,
-                      ),
-                    ),
+                    const SizedBox(width: 6),
+                    const Icon(Icons.north_east, size: 16, color: tomato),
                   ],
                 ),
               ],
             ),
           ),
-        ),
+        ],
       ),
     );
   }
 }
 
 // ============================================================
-// KONTAK (05)
+// KONTAK (// 05) — link sosmed + form (mode demo)
 // ============================================================
 class _ContactSection extends StatefulWidget {
   const _ContactSection();
@@ -1921,30 +2246,10 @@ class _ContactSectionState extends State<_ContactSection> {
     super.dispose();
   }
 
-  Future<void> _submit() async {
+  void _submit() {
     if (_form.currentState?.validate() ?? false) {
-      final name = _name.text.trim();
-      final senderEmail = _email.text.trim();
-      final msg = _message.text.trim();
-
-      // Membuka email client jika tersedia
-      final mailUri = Uri(
-        scheme: 'mailto',
-        path: 'fikri.informatika@gmail.com',
-        queryParameters: {
-          'subject': 'Pesan Portofolio dari $name ($senderEmail)',
-          'body': msg,
-        },
-      );
-
-      try {
-        if (await canLaunchUrl(mailUri)) {
-          await launchUrl(mailUri);
-        }
-      } catch (_) {}
-
-      if (!mounted) return;
-      showToast(context, 'Pesan terkirim! Terima kasih, $name.');
+      // TODO: hubungkan ke email/server/Firebase di sini.
+      showToast(context, 'Pesan terkirim! (mode demo)');
       _name.clear();
       _email.clear();
       _message.clear();
@@ -1958,45 +2263,42 @@ class _ContactSectionState extends State<_ContactSection> {
     int maxLines = 1,
     String? Function(String?)? validator,
   }) {
-    OutlineInputBorder border(Color c) => OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: c),
+    OutlineInputBorder border(Color c, double w) => OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: c, width: w),
         );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label.toUpperCase(),
-          style: mono(
-            size: 11,
-            color: textMuted,
-            weight: FontWeight.w600,
-            spacing: 1,
-          ),
+          style: mono(size: 11, weight: FontWeight.w700, spacing: 1),
         ),
         const SizedBox(height: 8),
         TextFormField(
           controller: controller,
           maxLines: maxLines,
           validator: validator,
-          style: mono(size: 13.5),
-          cursorColor: cyan,
+          style: body(size: 15, weight: FontWeight.w500),
+          cursorColor: tomato,
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: mono(size: 13.5, color: const Color(0xFF4A5468)),
+            hintStyle: body(size: 15, color: const Color(0xFF8C867C)),
             filled: true,
-            fillColor: bgTerminal,
+            fillColor: cardBg,
             isDense: true,
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 14,
-              vertical: 14,
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+            border: border(ink, 2),
+            enabledBorder: border(ink, 2),
+            focusedBorder: border(tomato, 2.5),
+            errorBorder: border(tomato, 2),
+            focusedErrorBorder: border(tomato, 2.5),
+            errorStyle: mono(
+              size: 11,
+              color: const Color(0xFFB3261E),
+              weight: FontWeight.w700,
             ),
-            border: border(borderColor),
-            enabledBorder: border(borderColor),
-            focusedBorder: border(cyan),
-            errorBorder: border(const Color(0xFFFF5F57)),
-            focusedErrorBorder: border(const Color(0xFFFF5F57)),
-            errorStyle: mono(size: 11, color: const Color(0xFFFF5F57)),
           ),
         ),
       ],
@@ -2005,87 +2307,104 @@ class _ContactSectionState extends State<_ContactSection> {
 
   @override
   Widget build(BuildContext context) {
+    final wide = isWide(context);
+
+    final intro = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          kContactIntro,
+          style: body(size: 16, color: textMuted, height: 1.7),
+        ),
+        const SizedBox(height: 24),
+        for (int i = 0; i < kSocials.length; i++)
+          _Reveal(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: _LinkTile(
+                social: kSocials[i],
+                fill: kPastels[i % kPastels.length],
+              ),
+            ),
+          ),
+      ],
+    );
+
+    final form = Container(
+      padding: const EdgeInsets.all(22),
+      decoration: brutal(fill: lilac, radius: 20, shadow: 7),
+      child: Form(
+        key: _form,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _field(
+              'Nama',
+              _name,
+              'Nama kamu',
+              validator: (v) =>
+                  (v == null || v.trim().isEmpty) ? 'Nama wajib diisi' : null,
+            ),
+            const SizedBox(height: 16),
+            _field(
+              'Email',
+              _email,
+              'email@contoh.com',
+              validator: (v) {
+                final t = v?.trim() ?? '';
+                if (t.isEmpty) return 'Email wajib diisi';
+                if (!t.contains('@') || !t.contains('.')) {
+                  return 'Format email belum benar';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 16),
+            _field(
+              'Pesan',
+              _message,
+              'Ceritakan proyek atau idemu...',
+              maxLines: 4,
+              validator: (v) =>
+                  (v == null || v.trim().isEmpty) ? 'Pesan wajib diisi' : null,
+            ),
+            const SizedBox(height: 22),
+            _PrimaryButton(label: 'Kirim Pesan →', onTap: _submit),
+            const SizedBox(height: 14),
+            Text(
+              kFormNote,
+              textAlign: TextAlign.center,
+              style: mono(size: 11, weight: FontWeight.w700),
+            ),
+          ],
+        ),
+      ),
+    );
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+      padding: EdgeInsets.symmetric(
+        horizontal: pagePad(context),
+        vertical: sectionPad(context),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const _SectionTitle(number: '05', title: 'Mari Terhubung'),
-          const SizedBox(height: 20),
-          Text(
-            kContactIntro,
-            style: heading(
-              size: 15,
-              color: textMuted,
-              weight: FontWeight.w400,
-              height: 1.7,
-            ),
-          ),
-          const SizedBox(height: 22),
-          for (final s in kSocials)
-            _Reveal(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: _LinkTile(social: s),
-              ),
-            ),
-          const SizedBox(height: 22),
-          Container(
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: const Color(0x0AFFFFFF),
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: borderColor),
-            ),
-            child: Form(
-              key: _form,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  _field(
-                    'Nama',
-                    _name,
-                    'Nama kamu',
-                    validator: (v) => (v == null || v.trim().isEmpty)
-                        ? 'Nama wajib diisi'
-                        : null,
-                  ),
-                  const SizedBox(height: 14),
-                  _field(
-                    'Email',
-                    _email,
-                    'email@contoh.com',
-                    validator: (v) {
-                      final t = v?.trim() ?? '';
-                      if (t.isEmpty) return 'Email wajib diisi';
-                      if (!t.contains('@') || !t.contains('.')) {
-                        return 'Format email belum benar';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 14),
-                  _field(
-                    'Pesan',
-                    _message,
-                    'Ceritakan proyek atau idemu...',
-                    maxLines: 4,
-                    validator: (v) => (v == null || v.trim().isEmpty)
-                        ? 'Pesan wajib diisi'
-                        : null,
-                  ),
-                  const SizedBox(height: 18),
-                  _GradientButton(label: 'Kirim Pesan →', onTap: _submit),
-                  const SizedBox(height: 12),
-                  Text(
-                    '// formulir terhubung langsung',
-                    textAlign: TextAlign.center,
-                    style: mono(size: 11, color: textMuted),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          SizedBox(height: wide ? 36 : 28),
+          if (wide)
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(flex: 5, child: intro),
+                const SizedBox(width: 56),
+                Expanded(flex: 6, child: form),
+              ],
+            )
+          else ...[
+            intro,
+            const SizedBox(height: 16),
+            form,
+          ],
         ],
       ),
     );
@@ -2094,61 +2413,45 @@ class _ContactSectionState extends State<_ContactSection> {
 
 class _LinkTile extends StatelessWidget {
   final Social social;
-  const _LinkTile({required this.social});
+  final Color fill;
+  const _LinkTile({required this.social, required this.fill});
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: Ink(
-        decoration: BoxDecoration(
-          color: const Color(0x0AFFFFFF),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: borderColor),
-        ),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(12),
-          onTap: () => openLink(context, social.url),
-          child: Padding(
-            padding: const EdgeInsets.all(14),
-            child: Row(
+    return _Lift(
+      fill: cardBg,
+      radius: 14,
+      shadow: 4,
+      padding: const EdgeInsets.all(14),
+      onTap: () => openLink(context, social.url),
+      child: Row(
+        children: [
+          Container(
+            width: 42,
+            height: 42,
+            decoration: brutal(fill: fill, radius: 10, shadow: 0),
+            child: Center(child: _SocialGlyph(social: social, size: 20)),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: cyanA(0.08),
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: cyanA(0.25)),
-                  ),
-                  child: Center(child: _SocialGlyph(social: social, size: 19)),
-                ),
-                const SizedBox(width: 14),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        social.label,
-                        style: heading(size: 15, weight: FontWeight.w600),
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        social.handle,
-                        overflow: TextOverflow.ellipsis,
-                        style: mono(size: 11.5, color: textMuted),
-                      ),
-                    ],
-                  ),
-                ),
                 Text(
-                  '→',
-                  style: mono(size: 16, color: cyan, weight: FontWeight.w700),
+                  social.label,
+                  style: body(size: 15.5, weight: FontWeight.w700, height: 1.2),
+                ),
+                const SizedBox(height: 3),
+                Text(
+                  social.handle,
+                  overflow: TextOverflow.ellipsis,
+                  style: mono(size: 11.5, color: textMuted),
                 ),
               ],
             ),
           ),
-        ),
+          const Icon(Icons.north_east, size: 18, color: ink),
+        ],
       ),
     );
   }
@@ -2164,64 +2467,51 @@ class _FooterSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(height: 1, color: borderColor),
-          const SizedBox(height: 20),
-          Text.rich(
-            TextSpan(
-              style: mono(size: 12.5, color: textMuted),
-              children: [
-                const TextSpan(text: '\$ echo "Dibangun dengan '),
-                TextSpan(
-                  text: '♥',
-                  style: mono(size: 12.5, color: cyan),
-                ),
-                const TextSpan(text: ' dan banyak kopi"'),
-              ],
-            ),
-          ),
-          const SizedBox(height: 14),
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  '© ${DateTime.now().year} $kNameFirst $kNameLast — $kRole',
-                  style: mono(size: 11.5, color: textMuted, height: 1.5),
-                ),
-              ),
-              const SizedBox(width: 12),
-              Material(
-                color: Colors.transparent,
-                child: Ink(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: cyanA(0.08),
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: cyanA(0.3)),
+      padding: EdgeInsets.fromLTRB(pagePad(context), 16, pagePad(context), 36),
+      child: Container(
+        padding: const EdgeInsets.all(22),
+        decoration: BoxDecoration(
+          color: ink,
+          borderRadius: BorderRadius.circular(18),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    kFooterNote,
+                    style: heading(size: 16, color: paper, height: 1.3),
                   ),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(10),
-                    onTap: onTop,
-                    child: Center(
-                      child: Text(
-                        '↑',
-                        style: mono(
-                          size: 18,
-                          color: cyan,
-                          weight: FontWeight.w700,
-                        ),
-                      ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '© ${DateTime.now().year} $kNameFirst $kNameLast — $kRole',
+                    style: mono(
+                      size: 11.5,
+                      color: const Color(0xFFBDB6A8),
+                      height: 1.5,
                     ),
                   ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 16),
+            Material(
+              color: sun,
+              borderRadius: BorderRadius.circular(12),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(12),
+                onTap: onTop,
+                child: const SizedBox(
+                  width: 48,
+                  height: 48,
+                  child: Icon(Icons.arrow_upward_rounded, size: 24, color: ink),
                 ),
               ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -2230,21 +2520,148 @@ class _FooterSection extends StatelessWidget {
 // ============================================================
 // WIDGET BERSAMA
 // ============================================================
+// Kotak interaktif bergaya brutal: saat di-hover (web) kotak "terangkat",
+// saat ditekan kotak "menekan" bayangannya. Dipakai di hampir semua kartu.
+class _Lift extends StatefulWidget {
+  final Widget child;
+  final VoidCallback? onTap;
+  final Color fill;
+  final double radius;
+  final double shadow;
+  final EdgeInsetsGeometry padding;
+  final double? width;
+  final double? height;
+  final Clip clip;
+  const _Lift({
+    required this.child,
+    this.onTap,
+    this.fill = cardBg,
+    this.radius = 14,
+    this.shadow = 5,
+    this.padding = EdgeInsets.zero,
+    this.width,
+    this.height,
+    this.clip = Clip.none,
+  });
+
+  @override
+  State<_Lift> createState() => _LiftState();
+}
+
+class _LiftState extends State<_Lift> {
+  bool _hover = false;
+  bool _down = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final tappable = widget.onTap != null;
+    final move = _down ? widget.shadow * 0.8 : (_hover ? -3.0 : 0.0);
+    final sh = _down
+        ? widget.shadow * 0.2
+        : (_hover ? widget.shadow + 3 : widget.shadow);
+    final box = AnimatedContainer(
+      duration: const Duration(milliseconds: 110),
+      curve: Curves.easeOut,
+      width: widget.width,
+      height: widget.height,
+      padding: widget.padding,
+      clipBehavior: widget.clip,
+      transform: Matrix4.translationValues(move, move, 0),
+      decoration: brutal(fill: widget.fill, radius: widget.radius, shadow: sh),
+      child: widget.child,
+    );
+    return MouseRegion(
+      cursor: tappable ? SystemMouseCursors.click : MouseCursor.defer,
+      onEnter: (_) => setState(() => _hover = true),
+      onExit: (_) => setState(() {
+        _hover = false;
+        _down = false;
+      }),
+      child: tappable
+          ? GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTapDown: (_) => setState(() => _down = true),
+              onTapUp: (_) => setState(() => _down = false),
+              onTapCancel: () => setState(() => _down = false),
+              onTap: widget.onTap,
+              child: box,
+            )
+          : box,
+    );
+  }
+}
+
+class _PrimaryButton extends StatelessWidget {
+  final String label;
+  final VoidCallback onTap;
+  const _PrimaryButton({required this.label, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return _Lift(
+      fill: tomato,
+      radius: 12,
+      shadow: 4,
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
+      onTap: onTap,
+      child: Center(
+        widthFactor: 1,
+        heightFactor: 1,
+        child: Text(label, style: mono(size: 13.5, weight: FontWeight.w700)),
+      ),
+    );
+  }
+}
+
+class _SecondaryButton extends StatelessWidget {
+  final String label;
+  final VoidCallback onTap;
+  const _SecondaryButton({required this.label, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return _Lift(
+      fill: cardBg,
+      radius: 12,
+      shadow: 4,
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
+      onTap: onTap,
+      child: Center(
+        widthFactor: 1,
+        heightFactor: 1,
+        child: Text(label, style: mono(size: 13.5, weight: FontWeight.w700)),
+      ),
+    );
+  }
+}
+
+// Logo = inisial dari kNameFirst + kNameLast (otomatis ikut data).
 class _Logo extends StatelessWidget {
   const _Logo();
 
   @override
   Widget build(BuildContext context) {
-    final base = mono(size: 22, weight: FontWeight.w700, spacing: 1);
-    return Text.rich(
-      TextSpan(
-        style: base,
-        children: [
-          TextSpan(text: '<', style: base.copyWith(color: cyan)),
-          TextSpan(text: 'MFR', style: base.copyWith(color: textPrimary)),
-          TextSpan(text: '/>', style: base.copyWith(color: cyan)),
+    final a = kNameFirst.isNotEmpty ? kNameFirst[0] : '';
+    final b = kNameLast.isNotEmpty ? kNameLast[0] : '';
+    final initials = '$a$b'.toUpperCase();
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Transform.rotate(
+          angle: -0.06,
+          child: Container(
+            width: 46,
+            height: 46,
+            alignment: Alignment.center,
+            decoration: brutal(fill: tomato, radius: 12, shadow: 3),
+            child: Text(initials, style: heading(size: 19, spacing: 0.5)),
+          ),
+        ),
+        if (MediaQuery.of(context).size.width >= 1100) ...[
+          const SizedBox(width: 14),
+          Text('$kNameFirst $kNameLast', style: heading(size: 17)),
         ],
-      ),
+      ],
     );
   }
 }
@@ -2253,33 +2670,76 @@ class _HamburgerButton extends StatelessWidget {
   final VoidCallback onTap;
   const _HamburgerButton({required this.onTap});
 
-  Widget _line() => Container(
-        width: 26,
-        height: 2.5,
-        decoration: const BoxDecoration(
-          color: cyan,
-          boxShadow: [BoxShadow(color: Color(0x6600E5FF), blurRadius: 6)],
-        ),
-      );
+  Widget _line() => Container(width: 20, height: 3, color: ink);
 
   @override
   Widget build(BuildContext context) {
-    return InkResponse(
+    return _Lift(
+      width: 46,
+      height: 46,
+      fill: sun,
+      radius: 12,
+      shadow: 3,
       onTap: onTap,
-      radius: 26,
-      child: SizedBox(
-        width: 44,
-        height: 44,
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _line(),
-              const SizedBox(height: 6),
-              _line(),
-              const SizedBox(height: 6),
-              _line(),
-            ],
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _line(),
+          const SizedBox(height: 5),
+          _line(),
+          const SizedBox(height: 5),
+          _line(),
+        ],
+      ),
+    );
+  }
+}
+
+// Link menu di header (layar lebar): pil tinta saat aktif, kuning saat di-hover.
+class _NavLink extends StatefulWidget {
+  final String label;
+  final bool active;
+  final VoidCallback onTap;
+  const _NavLink({
+    required this.label,
+    required this.active,
+    required this.onTap,
+  });
+
+  @override
+  State<_NavLink> createState() => _NavLinkState();
+}
+
+class _NavLinkState extends State<_NavLink> {
+  bool _hover = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final fillColor =
+        widget.active ? ink : (_hover ? sun : Colors.transparent);
+    final textColor = widget.active ? paper : ink;
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _hover = true),
+      onExit: (_) => setState(() => _hover = false),
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: widget.onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 150),
+          margin: const EdgeInsets.only(left: 6),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 9),
+          decoration: BoxDecoration(
+            color: fillColor,
+            borderRadius: BorderRadius.circular(40),
+            border: Border.all(
+              color: widget.active || _hover ? ink : Colors.transparent,
+              width: 2,
+            ),
+          ),
+          child: Text(
+            widget.label,
+            style: mono(size: 13, color: textColor, weight: FontWeight.w700),
           ),
         ),
       ),
@@ -2287,40 +2747,58 @@ class _HamburgerButton extends StatelessWidget {
   }
 }
 
+// Judul section: stiker nomor + garis tinta + judul dengan stabilo kuning.
 class _SectionTitle extends StatelessWidget {
   final String number, title;
   const _SectionTitle({required this.number, required this.title});
 
   @override
   Widget build(BuildContext context) {
+    final size = isWide(context) ? 46.0 : 34.0;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          '// $number',
-          style: mono(
-            size: 13,
-            color: cyan,
-            weight: FontWeight.w600,
-            spacing: 1,
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 520),
+          child: Row(
+            children: [
+              Transform.rotate(
+                angle: -0.06,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                  decoration: brutal(fill: sun, radius: 8, shadow: 3),
+                  child: Text(
+                    number,
+                    style: mono(size: 14, weight: FontWeight.w700),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 14),
+              Expanded(child: Container(height: 2.5, color: ink)),
+            ],
           ),
         ),
-        const SizedBox(height: 8),
-        Text(title, style: heading(size: 30, spacing: -0.8, height: 1.15)),
-        const SizedBox(height: 10),
-        Container(
-          width: 48,
-          height: 3,
-          decoration: BoxDecoration(
-            gradient: kGradient,
-            borderRadius: BorderRadius.circular(2),
-          ),
+        const SizedBox(height: 16),
+        Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Positioned(
+              left: -4,
+              right: -4,
+              bottom: 4,
+              height: size * 0.34,
+              child: const ColoredBox(color: sun),
+            ),
+            Text(title, style: heading(size: size, spacing: -1, height: 1.1)),
+          ],
         ),
       ],
     );
   }
 }
 
+// Chip: polos (putih) atau berwarna pastel (accent) sesuai teksnya.
 class _Chip extends StatelessWidget {
   final String label;
   final bool accent;
@@ -2329,102 +2807,83 @@ class _Chip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
       decoration: BoxDecoration(
-        color: accent ? cyanA(0.08) : const Color(0x0AFFFFFF),
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(
-          color: accent ? cyanA(0.3) : const Color(0x1AFFFFFF),
-        ),
+        color: accent ? pastelFor(label) : cardBg,
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(color: ink, width: 1.6),
       ),
-      child: Text(
-        label,
-        style: mono(size: 12, color: accent ? cyan : textMuted),
-      ),
+      child: Text(label, style: mono(size: 11.5, weight: FontWeight.w700)),
     );
   }
 }
 
-class _GradientText extends StatelessWidget {
-  final String text;
-  final TextStyle style;
-  const _GradientText(this.text, this.style);
+// Pita berjalan: nama-nama skill (dari kSkills) bergulir tanpa henti.
+class _TickerBand extends StatefulWidget {
+  const _TickerBand();
 
   @override
-  Widget build(BuildContext context) {
-    return ShaderMask(
-      blendMode: BlendMode.srcIn,
-      shaderCallback: (rect) => kGradient.createShader(rect),
-      child: Text(text, style: style.copyWith(color: Colors.white)),
-    );
-  }
+  State<_TickerBand> createState() => _TickerBandState();
 }
 
-class _GradientButton extends StatelessWidget {
-  final String label;
-  final VoidCallback onTap;
-  const _GradientButton({required this.label, required this.onTap});
+class _TickerBandState extends State<_TickerBand>
+    with SingleTickerProviderStateMixin {
+  final _sc = ScrollController();
+  late final Ticker _ticker;
+  late final List<String> _items = [for (final g in kSkills) ...g.items];
+
+  @override
+  void initState() {
+    super.initState();
+    _ticker = createTicker((d) {
+      if (_sc.hasClients) _sc.jumpTo(d.inMicroseconds / 1e6 * 55);
+    })..start();
+  }
+
+  @override
+  void dispose() {
+    _ticker.dispose();
+    _sc.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: Ink(
-        decoration: BoxDecoration(
-          gradient: kGradient,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [BoxShadow(color: cyanA(0.3), blurRadius: 18)],
-        ),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(10),
-          onTap: onTap,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-            child: Center(
-              widthFactor: 1,
-              heightFactor: 1,
-              child: Text(
-                label,
-                style: mono(size: 13.5, color: bg, weight: FontWeight.w700),
+    if (_items.isEmpty) return const SizedBox.shrink();
+    return Container(
+      height: 56,
+      decoration: const BoxDecoration(
+        color: sun,
+        border: Border.symmetric(horizontal: BorderSide(color: ink, width: 2)),
+      ),
+      child: ListView.builder(
+        controller: _sc,
+        scrollDirection: Axis.horizontal,
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (context, i) {
+          return Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    _items[i % _items.length].toUpperCase(),
+                    style: heading(size: 17, spacing: 0.5),
+                  ),
+                  const SizedBox(width: 36),
+                  const Icon(Icons.star_rounded, size: 20, color: tomato),
+                ],
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
 }
 
-class _OutlineButton extends StatelessWidget {
-  final String label;
-  final VoidCallback onTap;
-  const _OutlineButton({required this.label, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: Ink(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: cyan),
-        ),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(10),
-          onTap: onTap,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-            child: Text(
-              label,
-              style: mono(size: 13.5, color: cyan, weight: FontWeight.w700),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
+// Mengubah "teks **tebal** biasa" menjadi potongan TextSpan.
 List<InlineSpan> _markup(String s, TextStyle base, TextStyle bold) {
   final parts = s.split('**');
   return [
@@ -2433,7 +2892,9 @@ List<InlineSpan> _markup(String s, TextStyle base, TextStyle bold) {
   ];
 }
 
-// ---------- Animasi saat Muncul di Layar ----------
+// ---------- Animasi saat muncul di layar ----------
+// Memanggil builder dengan visible=true begitu widget masuk area layar
+// (sekali saja). Tidak butuh paket tambahan.
 class _OnVisible extends StatefulWidget {
   final Widget Function(BuildContext context, bool visible) builder;
   final Duration delay;
@@ -2469,30 +2930,23 @@ class _OnVisibleState extends State<_OnVisible> {
   void _check() {
     if (_triggered || !mounted) return;
     final ro = context.findRenderObject();
-    if (ro is! RenderBox || !ro.attached || !ro.hasSize || ro.size.isEmpty) {
-      return;
-    }
-
-    try {
-      if (ro.localToGlobal(Offset.zero).dy < _screenH * 0.95) {
-        _triggered = true;
-        _position?.removeListener(_check);
-        if (widget.delay == Duration.zero) {
-          setState(() => _visible = true);
-        } else {
-          Future.delayed(widget.delay, () {
-            if (mounted) setState(() => _visible = true);
-          });
-        }
+    if (ro is! RenderBox || !ro.attached || !ro.hasSize) return;
+    if (ro.localToGlobal(Offset.zero).dy < _screenH * 0.92) {
+      _triggered = true;
+      _position?.removeListener(_check);
+      if (widget.delay == Duration.zero) {
+        setState(() => _visible = true);
+      } else {
+        Future.delayed(widget.delay, () {
+          if (mounted) setState(() => _visible = true);
+        });
       }
-    } catch (_) {}
+    }
   }
 
   @override
   void dispose() {
-    try {
-      _position?.removeListener(_check);
-    } catch (_) {}
+    _position?.removeListener(_check);
     super.dispose();
   }
 
@@ -2528,11 +2982,7 @@ class _CountUp extends StatelessWidget {
   final int value;
   final String suffix;
   final TextStyle style;
-  const _CountUp({
-    required this.value,
-    required this.suffix,
-    required this.style,
-  });
+  const _CountUp({required this.value, required this.suffix, required this.style});
 
   @override
   Widget build(BuildContext context) {
@@ -2541,108 +2991,37 @@ class _CountUp extends StatelessWidget {
         tween: Tween<double>(begin: 0, end: visible ? value.toDouble() : 0),
         duration: const Duration(milliseconds: 1600),
         curve: Curves.easeOutCubic,
-        builder: (context, v, _) => _GradientText('${v.round()}$suffix', style),
+        builder: (context, v, _) => Text('${v.round()}$suffix', style: style),
       ),
     );
   }
 }
 
 // ============================================================
-// LATAR PARTIKEL & GRID SIBER
+// LATAR: kertas bertitik (statis, ringan di baterai)
 // ============================================================
-class _Particle {
-  final double x, y, vx, vy;
-  const _Particle(this.x, this.y, this.vx, this.vy);
-}
-
-class _Background extends StatefulWidget {
+class _Background extends StatelessWidget {
   const _Background();
 
   @override
-  State<_Background> createState() => _BackgroundState();
-}
-
-class _BackgroundState extends State<_Background>
-    with SingleTickerProviderStateMixin {
-  final _time = ValueNotifier<double>(0);
-  late final Ticker _ticker;
-  late final List<_Particle> _particles;
-
-  @override
-  void initState() {
-    super.initState();
-    final rnd = math.Random(7);
-    _particles = List.generate(
-      45,
-      (_) => _Particle(
-        rnd.nextDouble(),
-        rnd.nextDouble(),
-        (rnd.nextDouble() - 0.5) * 0.02,
-        (rnd.nextDouble() - 0.5) * 0.02,
-      ),
-    );
-    _ticker = createTicker((d) => _time.value = d.inMicroseconds / 1e6)
-      ..start();
-  }
-
-  @override
-  void dispose() {
-    _ticker.dispose();
-    _time.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return RepaintBoundary(
-      child: CustomPaint(
-        painter: _BackgroundPainter(_particles, _time),
-        size: Size.infinite,
-      ),
+    return const RepaintBoundary(
+      child: CustomPaint(painter: _DotPainter(), size: Size.infinite),
     );
   }
 }
 
-class _BackgroundPainter extends CustomPainter {
-  final List<_Particle> particles;
-  final ValueListenable<double> time;
-  _BackgroundPainter(this.particles, this.time) : super(repaint: time);
+class _DotPainter extends CustomPainter {
+  const _DotPainter();
 
   @override
   void paint(Canvas canvas, Size size) {
-    final grid = Paint()
-      ..color = const Color(0x0800E5FF)
-      ..strokeWidth = 1;
-    const step = 50.0;
-    for (double x = 0; x <= size.width; x += step) {
-      canvas.drawLine(Offset(x, 0), Offset(x, size.height), grid);
-    }
-    for (double y = 0; y <= size.height; y += step) {
-      canvas.drawLine(Offset(0, y), Offset(size.width, y), grid);
-    }
-
-    final t = time.value;
-    final pts = <Offset>[
-      for (final p in particles)
-        Offset(
-          ((p.x + p.vx * t) % 1.0) * size.width,
-          ((p.y + p.vy * t) % 1.0) * size.height,
-        ),
-    ];
-    const maxDist = 150.0;
-    final line = Paint()..strokeWidth = 1;
-    for (int i = 0; i < pts.length; i++) {
-      for (int j = i + 1; j < pts.length; j++) {
-        final d = (pts[i] - pts[j]).distance;
-        if (d < maxDist) {
-          line.color = cyanA((1 - d / maxDist) * 0.22);
-          canvas.drawLine(pts[i], pts[j], line);
-        }
+    final paint = Paint()..color = const Color(0x2215130F);
+    const step = 26.0;
+    for (double y = 14; y < size.height; y += step) {
+      for (double x = 14; x < size.width; x += step) {
+        canvas.drawCircle(Offset(x, y), 1.2, paint);
       }
-    }
-    final node = Paint()..color = cyanA(0.45);
-    for (final p in pts) {
-      canvas.drawCircle(p, 2, node);
     }
   }
 
